@@ -1,6 +1,6 @@
-#include "event.h"
+#include "graphics/event.h"
 
-#include "window.h"
+#include "graphics/window.h"
 
 namespace lyz {
 

@@ -4,7 +4,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-#include "window.h"
+#include "graphics/window.h"
 
 using namespace std;
 
@@ -25,7 +25,7 @@ int main() {
 
 		win->onUpdate();
 
-		cout << win->getEventData().xpos << ", " << win->getEventData().ypos << endl;
+		//cout << win->getEventData().xpos << ", " << win->getEventData().ypos << endl;
 	}
 
 	return 0;
