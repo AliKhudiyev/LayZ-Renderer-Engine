@@ -34,13 +34,13 @@ namespace lyz {
 		};
 
 		glAttachShader(m_ID, vertex);
-		glLinkProgram(m_ID);
+		/*glLinkProgram(m_ID);
 		glGetProgramiv(m_ID, GL_LINK_STATUS, &success);
 		if (!success)
 		{
 			glGetProgramInfoLog(m_ID, LYZ_INFOLOG_SIZE, nullptr, infoLog);
 			std::cout << "ERROR[shader]:program linking failed!\n" << infoLog << std::endl;
-		}
+		}*/
 		glDeleteShader(vertex);
 
 		// Fragment Shader
