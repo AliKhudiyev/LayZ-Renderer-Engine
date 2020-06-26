@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include "graphics/window.h"
+#include "graphics/shader.h"
 
 using namespace std;
 
@@ -14,14 +15,30 @@ int main() {
 
 	Window* win = new Window("BIG_KAMAL", 640, 480);
 
-	string vertex_shader = 
-		""
-		""
-		;
+	Shader* shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
+	shader->enable();
+
+	float vertices[] = {
+		-1.0, -1.0, 0.0,
+		1.0, -1.0, 0.0,
+		0.0, 1.0, 0.0
+	};
+
+	GLuint vertexBuffer;
+	glGenBuffers(1, &vertexBuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+	glBufferData(GL_ARRAY_BUFFER, 1, vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 
 	while (win->isRunning())
 	{
-		;
+		glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+		shader->enable();
+
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 
 		win->onUpdate();
 

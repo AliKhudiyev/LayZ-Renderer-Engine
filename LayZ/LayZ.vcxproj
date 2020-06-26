@@ -143,11 +143,18 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
     <ClCompile Include="src\graphics\window.cpp" />
+    <ClCompile Include="src\utils\file.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\graphics\event.h" />
     <ClInclude Include="include\graphics\shader.h" />
     <ClInclude Include="include\graphics\window.h" />
+    <ClInclude Include="include\utils\file.h" />
+    <ClInclude Include="include\utils\utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\shaders\fragment.glsl" />
+    <None Include="src\shaders\vertex.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

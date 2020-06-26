@@ -17,8 +17,7 @@ namespace lyz {
 			glfwTerminate();
 			assert(false);
 		}
-
-		/* Make the window's context current */
+		
 		glfwMakeContextCurrent(m_window);
 		glfwSetWindowUserPointer(m_window, this);
 		glfwSetWindowSizeCallback(m_window, EventHandler::windowSize_callback);
@@ -57,6 +56,12 @@ namespace lyz {
 			assert(false);
 			return false;
 		}
+
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+		return true;
 	}
 
 }
