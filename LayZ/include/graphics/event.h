@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-namespace lyz {
+namespace lyz { namespace graphics {
 
 	struct EventHandler {
 		static void windowSize_callback(GLFWwindow* window, int width, int height);
@@ -18,4 +18,4 @@ namespace lyz {
 		int button;
 	};
 
-}
+} }

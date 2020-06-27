@@ -3,7 +3,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
-namespace lyz {
+namespace lyz { namespace graphics {
 
 	class Shader {
 	private:
@@ -22,4 +22,4 @@ namespace lyz {
 		void init();
 	};
 
-}
+} }

@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-namespace lyz {
+namespace lyz { namespace graphics {
 
 	Window::Window(const char * title, unsigned width, unsigned height)
 	{
@@ -19,7 +19,7 @@ namespace lyz {
 			glfwTerminate();
 			assert(false);
 		}
-		
+
 		glfwMakeContextCurrent(m_window);
 		glfwSetWindowUserPointer(m_window, this);
 		glfwSetWindowSizeCallback(m_window, EventHandler::windowSize_callback);
@@ -68,4 +68,4 @@ namespace lyz {
 		return true;
 	}
 
-}
+} }

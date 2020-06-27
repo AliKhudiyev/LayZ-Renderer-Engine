@@ -7,7 +7,7 @@
 
 #include "event.h"
 
-namespace lyz {
+namespace lyz { namespace graphics {
 
 	class Window {
 		friend struct EventHandler;
@@ -30,5 +30,4 @@ namespace lyz {
 		bool init();
 	};
 
-
-}
+} }

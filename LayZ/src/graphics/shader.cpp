@@ -7,7 +7,7 @@
 #include <string>
 #include <cassert>
 
-namespace lyz {
+namespace lyz { namespace graphics {
 
 	Shader::Shader(const char * vertexpath, const char * fragmentpath) :
 		m_vertexpath(vertexpath), m_fragmentpath(fragmentpath)
@@ -22,7 +22,7 @@ namespace lyz {
 
 		LYZ_CALL(glShaderSource(vertex, 1, &vertex_chrs, nullptr));
 		LYZ_CALL(glCompileShader(vertex));
-		
+
 		GLint success;
 		char infoLog[LYZ_INFOLOG_SIZE];
 		LYZ_CALL(glGetShaderiv(vertex, GL_COMPILE_STATUS, &success));
@@ -91,4 +91,4 @@ namespace lyz {
 		m_ID = LYZ_CALL(glCreateProgram());
 	}
 
-}
+} }

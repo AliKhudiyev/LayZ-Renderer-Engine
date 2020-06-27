@@ -2,7 +2,7 @@
 
 #include "graphics/window.h"
 
-namespace lyz {
+namespace lyz { namespace graphics {
 
 	void EventHandler::windowSize_callback(GLFWwindow * window, int width, int height)
 	{
@@ -41,4 +41,4 @@ namespace lyz {
 		win->m_eventData.mods = mods;
 	}
 
-}
+} }

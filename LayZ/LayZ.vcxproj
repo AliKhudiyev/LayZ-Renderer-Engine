@@ -139,6 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\graphics\buffers\buffer.cpp" />
+    <ClCompile Include="src\graphics\buffers\indexBuffer.cpp" />
+    <ClCompile Include="src\graphics\buffers\vertexArray.cpp" />
+    <ClCompile Include="src\graphics\buffers\vertexBuffer.cpp" />
     <ClCompile Include="src\graphics\event.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
@@ -151,7 +155,14 @@
     <ClCompile Include="src\utils\file.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\entry.h" />
+    <ClInclude Include="include\graphics\buffers\buffer.h" />
+    <ClInclude Include="include\graphics\buffers\buffers.h" />
+    <ClInclude Include="include\graphics\buffers\indexBuffer.h" />
+    <ClInclude Include="include\graphics\buffers\vertexArray.h" />
+    <ClInclude Include="include\graphics\buffers\vertexBuffer.h" />
     <ClInclude Include="include\graphics\event.h" />
+    <ClInclude Include="include\graphics\graphics.h" />
     <ClInclude Include="include\graphics\shader.h" />
     <ClInclude Include="include\graphics\window.h" />
     <ClInclude Include="include\math\lyzm.h" />
