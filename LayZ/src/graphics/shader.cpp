@@ -15,80 +15,80 @@ namespace lyz {
 		init();
 
 		// Vertex Shader
-		GLuint vertex = glCreateShader(GL_VERTEX_SHADER);
+		GLuint vertex = LYZ_CALL(glCreateShader(GL_VERTEX_SHADER));
 
 		std::string vertex_str = utils::FileParser::read(vertexpath);
 		const char* vertex_chrs = vertex_str.c_str();
 
-		glShaderSource(vertex, 1, &vertex_chrs, nullptr);
-		glCompileShader(vertex);
+		LYZ_CALL(glShaderSource(vertex, 1, &vertex_chrs, nullptr));
+		LYZ_CALL(glCompileShader(vertex));
 		
 		GLint success;
 		char infoLog[LYZ_INFOLOG_SIZE];
-		glGetShaderiv(vertex, GL_COMPILE_STATUS, &success);
+		LYZ_CALL(glGetShaderiv(vertex, GL_COMPILE_STATUS, &success));
 		if (!success)
 		{
-			glGetShaderInfoLog(vertex, LYZ_INFOLOG_SIZE, nullptr, infoLog);
+			LYZ_CALL(glGetShaderInfoLog(vertex, LYZ_INFOLOG_SIZE, nullptr, infoLog));
 			std::cout << "ERROR[shader]:Vertex compilation failed!\n" << infoLog << std::endl;
 			assert(false);
 		};
 
-		glAttachShader(m_ID, vertex);
-		/*glLinkProgram(m_ID);
-		glGetProgramiv(m_ID, GL_LINK_STATUS, &success);
+		LYZ_CALL(glAttachShader(m_ID, vertex));
+		LYZ_CALL(glLinkProgram(m_ID));
+		LYZ_CALL(glGetProgramiv(m_ID, GL_LINK_STATUS, &success));
 		if (!success)
 		{
-			glGetProgramInfoLog(m_ID, LYZ_INFOLOG_SIZE, nullptr, infoLog);
+			LYZ_CALL(glGetProgramInfoLog(m_ID, LYZ_INFOLOG_SIZE, nullptr, infoLog));
 			std::cout << "ERROR[shader]:program linking failed!\n" << infoLog << std::endl;
-		}*/
-		glDeleteShader(vertex);
+		}
+		LYZ_CALL(glDeleteShader(vertex));
 
 		// Fragment Shader
-		GLuint fragment = glCreateShader(GL_FRAGMENT_SHADER);
+		GLuint fragment = LYZ_CALL(glCreateShader(GL_FRAGMENT_SHADER));
 
 		std::string fragment_str = utils::FileParser::read(fragmentpath);
 		const char* fragment_chrs = fragment_str.c_str();
 
-		glShaderSource(fragment, 1, &fragment_chrs, nullptr);
-		glCompileShader(fragment);
+		LYZ_CALL(glShaderSource(fragment, 1, &fragment_chrs, nullptr));
+		LYZ_CALL(glCompileShader(fragment));
 
-		glGetShaderiv(fragment, GL_COMPILE_STATUS, &success);
+		LYZ_CALL(glGetShaderiv(fragment, GL_COMPILE_STATUS, &success));
 		if (!success)
 		{
-			glGetShaderInfoLog(fragment, LYZ_INFOLOG_SIZE, nullptr, infoLog);
+			LYZ_CALL(glGetShaderInfoLog(fragment, LYZ_INFOLOG_SIZE, nullptr, infoLog));
 			std::cout << "ERROR[shader]:fragment compilation failed!\n" << infoLog << std::endl;
 			assert(false);
 		};
 
-		glAttachShader(m_ID, fragment);
-		glLinkProgram(m_ID);
-		glGetProgramiv(m_ID, GL_LINK_STATUS, &success);
+		LYZ_CALL(glAttachShader(m_ID, fragment));
+		LYZ_CALL(glLinkProgram(m_ID));
+		LYZ_CALL(glGetProgramiv(m_ID, GL_LINK_STATUS, &success));
 		if (!success)
 		{
-			glGetProgramInfoLog(m_ID, LYZ_INFOLOG_SIZE, nullptr, infoLog);
+			LYZ_CALL(glGetProgramInfoLog(m_ID, LYZ_INFOLOG_SIZE, nullptr, infoLog));
 			std::cout << "ERROR[shader]:program linking failed!\n" << infoLog << std::endl;
 		}
-		glDeleteShader(fragment);
+		LYZ_CALL(glDeleteShader(fragment));
 	}
 
 	Shader::~Shader()
 	{
-		glDeleteProgram(m_ID);
+		LYZ_CALL(glDeleteProgram(m_ID));
 	}
 
 	void Shader::enable() const
 	{
-		glUseProgram(m_ID);
+		LYZ_CALL(glUseProgram(m_ID));
 	}
 
 	void Shader::disable() const
 	{
-		glUseProgram(0);
+		LYZ_CALL(glUseProgram(0));
 	}
 
 	void Shader::init()
 	{
-		m_ID = glCreateProgram();
+		m_ID = LYZ_CALL(glCreateProgram());
 	}
 
 }

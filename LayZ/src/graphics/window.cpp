@@ -1,5 +1,7 @@
 #include "graphics/window.h"
 
+#include "utils/debug.h"
+
 #include <iostream>
 
 namespace lyz {
@@ -29,6 +31,8 @@ namespace lyz {
 			std::cerr << "ERROR[glew]: glew failed!\n";
 			assert(false);
 		}
+
+		utils::Debugger::clearError();
 	}
 
 	Window::~Window()
@@ -43,10 +47,10 @@ namespace lyz {
 
 	void Window::onUpdate() const
 	{
-		glfwSwapBuffers(m_window);
-		glClear(GL_COLOR_BUFFER_BIT);
+		LYZ_CALL(glfwSwapBuffers(m_window));
+		LYZ_CALL(glClear(GL_COLOR_BUFFER_BIT));
 
-		glfwPollEvents();
+		LYZ_CALL(glfwPollEvents());
 	}
 
 	bool Window::init()
