@@ -23,6 +23,19 @@ namespace lyz { namespace graphics {
 		LYZ_CALL(glBindBuffer(GL_ARRAY_BUFFER, 0));
 	}
 
+	void VertexBuffer::setData(GLvoid * data, GLsizei size)
+	{
+		LYZ_CALL(glGenBuffers(1, &m_ID));
+		LYZ_CALL(glBindBuffer(GL_ARRAY_BUFFER, m_ID));
+
+		if (data) {
+			LYZ_CALL(glBufferData(GL_ARRAY_BUFFER, size, data, GL_STATIC_DRAW));
+		}
+		else {
+			LYZ_CALL(glBufferData(GL_ARRAY_BUFFER, size, data, GL_DYNAMIC_DRAW));
+		}
+	}
+
 	void VertexBuffer::setLayout(const std::initializer_list<unsigned>& batchCounts)
 	{
 		unsigned totalCount = 0;

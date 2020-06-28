@@ -139,11 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\graphics\instanceRenderer.cpp" />
     <ClCompile Include="src\graphics\buffers\buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\indexBuffer.cpp" />
     <ClCompile Include="src\graphics\buffers\vertexArray.cpp" />
     <ClCompile Include="src\graphics\buffers\vertexBuffer.cpp" />
     <ClCompile Include="src\graphics\event.cpp" />
+    <ClCompile Include="src\graphics\renderable.cpp" />
+    <ClCompile Include="src\graphics\renderer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
     <ClCompile Include="src\graphics\window.cpp" />
@@ -163,8 +166,13 @@
     <ClInclude Include="include\graphics\buffers\vertexBuffer.h" />
     <ClInclude Include="include\graphics\event.h" />
     <ClInclude Include="include\graphics\graphics.h" />
+    <ClInclude Include="include\graphics\renderable.h" />
+    <ClInclude Include="include\graphics\renderer.h" />
     <ClInclude Include="include\graphics\shader.h" />
+    <ClInclude Include="include\graphics\instanceRenderer.h" />
+    <ClInclude Include="include\graphics\triangle.h" />
     <ClInclude Include="include\graphics\window.h" />
+    <ClInclude Include="include\lyz.h" />
     <ClInclude Include="include\math\lyzm.h" />
     <ClInclude Include="include\math\mat4.h" />
     <ClInclude Include="include\math\vec2.h" />
@@ -173,6 +181,7 @@
     <ClInclude Include="include\utils\debug.h" />
     <ClInclude Include="include\utils\file.h" />
     <ClInclude Include="include\utils\utils.h" />
+    <ClInclude Include="src\graphics\triangle.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\fragment.glsl" />

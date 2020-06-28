@@ -12,12 +12,14 @@ namespace lyz { namespace graphics {
 		unsigned m_offset = 0;
 
 	public:
+		VertexBuffer() = default;
 		VertexBuffer(GLvoid* data, GLsizei size);
 		~VertexBuffer();
 
-		void enable() const;
-		void disable() const;
+		void enable() const override;
+		void disable() const override;
 
+		void setData(GLvoid* data, GLsizei size) override;
 		void setLayout(const std::initializer_list<unsigned>& batchCounts);
 	};
 

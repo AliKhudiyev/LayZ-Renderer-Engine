@@ -17,6 +17,7 @@ namespace lyz { namespace graphics {
 
 		virtual void enable() const = 0;
 		virtual void disable() const = 0;
+		virtual void setData(GLvoid* data, GLsizei size) {};
 	};
 
 } }
