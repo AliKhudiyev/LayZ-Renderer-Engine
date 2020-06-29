@@ -6,12 +6,7 @@
 namespace lyz { namespace math {
 
 	struct vec2 {
-		union {
-			float data[2];
-			struct {
-				float x, y;
-			};
-		};
+		float data[2];
 
 		vec2() = default;
 		vec2(float x, float y);

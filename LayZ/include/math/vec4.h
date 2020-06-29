@@ -9,19 +9,7 @@
 namespace lyz { namespace math {
 
 	struct vec4 {
-		union {
-			float data[4];
-			struct {
-				vec3 u_vec;
-				float u_w;
-			};
-			struct {
-				float x, y, z, w;
-			};
-			struct {
-				float r, g, b, a;
-			};
-		};
+		float data[4];
 
 		vec4();
 		vec4(float x, float y, float z, float w);

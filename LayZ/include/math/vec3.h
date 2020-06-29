@@ -5,18 +5,7 @@
 namespace lyz { namespace math {
 
 	struct vec3 {
-		union {
-			float data[3];
-			struct {
-				float x, y, z;
-			};
-			struct {
-				float r, g, b;
-			};
-			struct {
-				float s, t, p;
-			};
-		};
+		float data[3];
 
 		vec3() = default;
 		vec3(float x, float y, float z);

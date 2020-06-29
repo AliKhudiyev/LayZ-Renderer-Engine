@@ -75,21 +75,21 @@ namespace lyz { namespace math {
 	{
 		// TODO: 
 		float rad = M_PI * angle / 180.0;
-		float len = sqrtf(powf(axis.x, 2) + powf(axis.y, 2) + powf(axis.z, 2));
-		const vec3 naxis(axis.x / len, axis.y / len, axis.z / len);
+		float len = sqrtf(powf(axis.data[0], 2) + powf(axis.data[1], 2) + powf(axis.data[2], 2));
+		const vec3 naxis(axis.data[0] / len, axis.data[1] / len, axis.data[2] / len);
 		return mat4(
-			vec4(cosf(rad)+powf(naxis.x, 2)*(1-cosf(rad)), naxis.x*naxis.y*(1-cosf(rad))-naxis.z*sinf(rad), naxis.x*naxis.z*(1-cosf(rad))+naxis.y*sinf(rad), 0.0),
-			vec4(naxis.y*naxis.x*(1-cosf(rad))+naxis.z*sinf(rad), cosf(rad)+powf(naxis.y, 2)*(1-cosf(rad)), naxis.y*naxis.z*(1-cosf(rad))-naxis.x*sinf(rad), 0.0),
-			vec4(naxis.z*naxis.x*(1-cosf(rad))-naxis.y*sinf(rad), naxis.z*naxis.y*(1-cosf(rad))+naxis.x*sinf(rad), cosf(rad)+powf(naxis.z, 2)*(1-cosf(rad)), 0.0),
+			vec4(cosf(rad)+powf(naxis.data[0], 2)*(1-cosf(rad)), naxis.data[0]*naxis.data[1]*(1-cosf(rad))-naxis.data[2]*sinf(rad), naxis.data[0]*naxis.data[2]*(1-cosf(rad))+naxis.data[1]*sinf(rad), 0.0),
+			vec4(naxis.data[1]*naxis.data[0]*(1-cosf(rad))+naxis.data[2]*sinf(rad), cosf(rad)+powf(naxis.data[1], 2)*(1-cosf(rad)), naxis.data[1]*naxis.data[2]*(1-cosf(rad))-naxis.data[0]*sinf(rad), 0.0),
+			vec4(naxis.data[2]*naxis.data[0]*(1-cosf(rad))-naxis.data[1]*sinf(rad), naxis.data[2]*naxis.data[1]*(1-cosf(rad))+naxis.data[0]*sinf(rad), cosf(rad)+powf(naxis.data[2], 2)*(1-cosf(rad)), 0.0),
 			vec4(0.0, 0.0, 0.0, 1.0)
 		);
 	}
 
 	mat4 mat4::rotate(float angle, const vec3 & begin, const vec3 & end)
 	{
-		const vec3 axis(end.x - begin.x, end.z - begin.z, end.z - begin.z);
+		const vec3 axis(end.data[0] - begin.data[0], end.data[2] - begin.data[2], end.data[2] - begin.data[2]);
 		const mat4 rotation = mat4::rotate(angle, axis);
-		mat4 result = mat4::translate(begin.x, begin.y, begin.z) * rotation;
+		mat4 result = mat4::translate(begin.data[0], begin.data[1], begin.data[2]) * rotation;
 
 		return result;
 	}

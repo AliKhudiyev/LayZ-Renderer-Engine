@@ -54,7 +54,7 @@ namespace lyz { namespace math {
 
 	vec3 vec4::xyz() const
 	{
-		return vec3(x, y, z);
+		return vec3(data[0], data[1], data[2]);
 	}
 
 	vec4 vec4::ones()
@@ -64,7 +64,7 @@ namespace lyz { namespace math {
 
 	vec4 vec4::to_vec4(const vec3 & vec, float w)
 	{
-		return vec4(vec.x, vec.y, vec.z, w);
+		return vec4(vec.data[0], vec.data[1], vec.data[2], w);
 	}
 
 	float vec4::dist(const vec4& vec) const
@@ -82,7 +82,9 @@ namespace lyz { namespace math {
 	vec4 vec4::cross(const vec4& vec) const
 	{
 		// TODO: 
-		return vec4(u_vec.cross(vec.u_vec), u_w);
+		vec3 u_vec {data[0], data[1], data[2]};
+		vec3 tmp_vec {vec.data[0], vec.data[1], vec.data[2]};
+		return vec4(u_vec.cross(tmp_vec), data[3]);
 	}
 
 	vec4 vec4::add(const vec4& vec) const
