@@ -21,8 +21,13 @@ if (GLEW_FOUND)
     link_libraries(${GLEW_LIBRARIES})
 endif()
 
+#add_subdirectory(Libs/GLFW/glfw-3.3.2)
+
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/*.cpp ${CMAKE_SOURCE_DIR}/*/*.cpp ${CMAKE_SOURCE_DIR}/*/*/*.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCES})
 
+#target_link_libraries(${PROJECT_NAME} glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
+#target_link_libraries(${PROJECT_NAME} glew32s.lib)
+#target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${OPENGL_gl_LIBRARY} glfw)

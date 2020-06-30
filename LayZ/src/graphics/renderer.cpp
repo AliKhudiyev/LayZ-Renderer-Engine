@@ -43,7 +43,7 @@ namespace lyz { namespace graphics {
 			m_vertexData->color = color;
 			++m_vertexData;
 		}
-
+		
 		for (unsigned i = m_indexCount, j = m_vertexCount; i < m_indexCount + 3 * (coords.size() - 2); i += 3, ++j) {
 			m_indices[i + 0] = m_vertexCount;
 			m_indices[i + 1] = j + 1;
@@ -62,11 +62,6 @@ namespace lyz { namespace graphics {
 
 		m_vertexArray->enable();
 		m_indexBuffer->enable();
-
-		/*for (unsigned i = 0; i < m_indexCount; ++i) {
-			std::cout << m_indices[i] << " ";
-		}
-		assert(false);*/
 
 		LYZ_CALL(glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, nullptr));
 

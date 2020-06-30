@@ -81,7 +81,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLEW\lib\Release\Win32;$(SolutionDir)Libs\GLFW\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLEW\lib\Win32;$(SolutionDir)Libs\GLFW\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;shell32.lib;opengl32.lib;user32.lib;gdi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -96,7 +96,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLEW\lib\Release\Win32;$(SolutionDir)Libs\GLFW\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLEW\lib\Win32;$(SolutionDir)Libs\GLFW\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;shell32.lib;opengl32.lib;user32.lib;gdi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -115,7 +115,7 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLEW\lib\Release\Win32;$(SolutionDir)Libs\GLFW\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLEW\lib\Win32;$(SolutionDir)Libs\GLFW\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;shell32.lib;opengl32.lib;user32.lib;gdi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -134,17 +134,18 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLEW\lib\Release\Win32;$(SolutionDir)Libs\GLFW\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)Libs\GLEW\lib\Win32;$(SolutionDir)Libs\GLFW\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;glfw3.lib;shell32.lib;opengl32.lib;user32.lib;gdi32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="include\graphics\instanceRenderer.cpp" />
+    <ClCompile Include="src\graphics\instanceRenderer.cpp" />
     <ClCompile Include="src\graphics\buffers\buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\indexBuffer.cpp" />
     <ClCompile Include="src\graphics\buffers\vertexArray.cpp" />
     <ClCompile Include="src\graphics\buffers\vertexBuffer.cpp" />
     <ClCompile Include="src\graphics\event.cpp" />
+    <ClCompile Include="src\graphics\pixelRenderer.cpp" />
     <ClCompile Include="src\graphics\renderable.cpp" />
     <ClCompile Include="src\graphics\renderer.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="include\graphics\buffers\vertexBuffer.h" />
     <ClInclude Include="include\graphics\event.h" />
     <ClInclude Include="include\graphics\graphics.h" />
+    <ClInclude Include="include\graphics\pixelRenderer.h" />
     <ClInclude Include="include\graphics\renderable.h" />
     <ClInclude Include="include\graphics\renderer.h" />
     <ClInclude Include="include\graphics\shader.h" />

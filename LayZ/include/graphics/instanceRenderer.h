@@ -8,11 +8,16 @@ namespace lyz { namespace graphics {
 	private:
 		std::vector<const Renderable*> m_renderables;
 
+		static InstanceRenderer* renderer;
+
 	private:
 		InstanceRenderer() = default;
 
 	public:
 		static InstanceRenderer* getRenderer();
+
+		void store(const Renderable* renderable) override;
+		void draw() override;
 	};
 
 } }

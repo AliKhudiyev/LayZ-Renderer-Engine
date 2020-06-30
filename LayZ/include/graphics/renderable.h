@@ -7,6 +7,8 @@
 #define LYZ_COORD2(x,y)		coord2_t(x,y)
 #define LYZ_COLOR(r,g,b,a)	color_t(r,g,b,a)
 #define LYZ_COLOR3(r,g,b)	color3_t(r,g,b)
+#define LYZ_RGBA(r,g,b,a)	color_t(r / 255.0, g / 255.0, b / 255.0, a)
+#define LYZ_RGB(r,g,b)		color3_t(r / 255.0, g / 255.0, b / 255.0)
 
 using coord_t = lyz::math::vec3;
 using coord2_t = lyz::math::vec2;
