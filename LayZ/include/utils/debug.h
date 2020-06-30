@@ -5,6 +5,7 @@
 
 #include <iostream>
 #include <string>
+#include <chrono>
 #include <cassert>
 
 namespace lyz { namespace utils {
@@ -12,10 +13,12 @@ namespace lyz { namespace utils {
 	struct Debugger {
 		static GLenum error;
 		static std::string msg, info;
+		static decltype(std::chrono::high_resolution_clock::now()) m_current_time;
 
 		static void clearError();
 		static GLenum getError();
 		static void dispatch();
+		static void showFPS(float deltatime);
 	};
 
 } }

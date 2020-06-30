@@ -13,6 +13,7 @@ using namespace std;
 
 using namespace lyz;
 using namespace graphics;
+using namespace utils;
 
 int main() {
 
@@ -90,14 +91,15 @@ int main() {
 		// renderer->store(plane);
 		//renderer->draw();
 
-		//instanceRenderer->store(sprite);
-		//instanceRenderer->store(sprite2);
-		//instanceRenderer->store(triangle);
-		//instanceRenderer->store(triangle2);
-		//instanceRenderer->draw();
+		Debugger::showFPS(1.0);
+		instanceRenderer->store(sprite);
+		instanceRenderer->store(sprite2);
+		instanceRenderer->store(triangle);
+		instanceRenderer->store(triangle2);
+		instanceRenderer->draw();
 
-		pixelRenderer->setPixelAt(100, LYZ_COLOR3(1.0, 0.0, 0.0));
-		cout << pixelRenderer->getPixelAt(100) << endl;
+		// pixelRenderer->setPixelAt(100, LYZ_COLOR3(1.0, 0.0, 0.0));
+		// cout << pixelRenderer->getPixelAt(100) << endl;
 		// pixelRenderer->draw();
 
 		win->onUpdate();

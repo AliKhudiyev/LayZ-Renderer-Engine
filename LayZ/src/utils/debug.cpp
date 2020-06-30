@@ -5,6 +5,7 @@ namespace lyz { namespace utils {
 	GLenum Debugger::error = GL_NO_ERROR;
 	std::string Debugger::msg = "";
 	std::string Debugger::info = "";
+	decltype(std::chrono::high_resolution_clock::now()) Debugger::m_current_time;
 
 	void Debugger::clearError()
 	{
@@ -70,6 +71,24 @@ namespace lyz { namespace utils {
 			break;
 		default: break;
 		}
+	}
+
+	void Debugger::showFPS(float deltatime)
+	{
+		static unsigned n_frame = 1;
+		static double fps = 0.;
+
+		if (n_frame == 1) {
+			Debugger::m_current_time = std::chrono::high_resolution_clock::now();
+		}
+		auto duration = std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::high_resolution_clock::now() - Debugger::m_current_time);
+		double dt = 1e-6 * static_cast<double>(duration.count());
+
+		if (dt >= deltatime) {
+			fps = n_frame / dt;
+			std::cout << fps << " FPS" << std::endl;
+			n_frame = 0;
+		}	++n_frame;
 	}
 
 } }
