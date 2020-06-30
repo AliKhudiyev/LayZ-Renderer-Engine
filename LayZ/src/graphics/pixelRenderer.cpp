@@ -28,7 +28,7 @@ namespace lyz { namespace graphics {
 		auto batchRenderer = Renderer::getRenderer();
 		// Renderable* rects = new Renderable[m_width * m_height];
 		
-		for (unsigned i = 0; i < m_width, ++i) {
+		for (unsigned i = 0; i < m_width; ++i) {
 			for (unsigned j = 0; j < m_height; ++j) {
 				std::vector<coord2_t> coords{
 					LYZ_COORD2(0.0, 0.0),

@@ -98,7 +98,7 @@ int main() {
 
 		pixelRenderer->setPixelAt(100, LYZ_COLOR3(1.0, 0.0, 0.0));
 		cout << pixelRenderer->getPixelAt(100) << endl;
-		pixelRenderer->draw();
+		// pixelRenderer->draw();
 
 		win->onUpdate();
 	}
