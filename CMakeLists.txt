@@ -21,24 +21,33 @@ set(PROJECT_DIR "LayZ")
 set(CMAKE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_DIR}/src)
 set(EXECUTABLE_NAME "layz")
 
-include_directories(${PROJECT_DIR}/include)
+if(UNIX)
+    include_directories(${PROJECT_DIR}/include)
 
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
+    find_package(OpenGL REQUIRED)
+    include_directories(${OPENGL_INCLUDE_DIR})
+    
+    find_package(glfw3 REQUIRED)
+    
+    find_package(GLEW REQUIRED)
+    if (GLEW_FOUND)
+        include_directories(${GLEW_INCLUDE_DIRS})
+    endif()
+    
+    link_libraries(${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES} glfw)
+endif(UNIX)
 
-find_package(glfw3 REQUIRED)
-
-find_package(GLEW REQUIRED)
-if (GLEW_FOUND)
-    include_directories(${GLEW_INCLUDE_DIRS})
-    link_libraries(${GLEW_LIBRARIES})
-endif()
+if (WIN32)
+    include_directories(${PROJECT_DIR}/include Libs/GLEW/include Libs/GLFW/include)
+    find_package(OpenGL REQUIRED)
+    include_directories(${OPENGL_INCLUDE_DIR})
+    
+    link_libraries(${OPENGL_gl_LIBRARY} "Libs/GLEW/lib/Win32/glew32.lib" "Libs/GLFW/lib-vc2015/glfw3.lib")
+endif(WIN32)
 
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/*.cpp)
 
 add_executable(${EXECUTABLE_NAME} ${SOURCES})
-
-target_link_libraries(${EXECUTABLE_NAME} ${OPENGL_gl_LIBRARY} glfw)
 
 subdirlist(SUBDIRS ${CMAKE_SOURCE_DIR})
 foreach(SUBDIR ${SUBDIRS})

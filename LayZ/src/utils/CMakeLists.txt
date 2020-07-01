@@ -1,15 +1,28 @@
 cmake_minimum_required(VERSION 3.1)
 
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIR})
+if(UNIX)
+    include_directories(${PROJECT_DIR}/include)
 
-find_package(glfw3 REQUIRED)
+    find_package(OpenGL REQUIRED)
+    include_directories(${OPENGL_INCLUDE_DIR})
+    
+    find_package(glfw3 REQUIRED)
+    
+    find_package(GLEW REQUIRED)
+    if (GLEW_FOUND)
+        include_directories(${GLEW_INCLUDE_DIRS})
+    endif()
+    
+    link_libraries(${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES} glfw)
+endif(UNIX)
 
-find_package(GLEW REQUIRED)
-if (GLEW_FOUND)
-    include_directories(${GLEW_INCLUDE_DIRS})
-    link_libraries(${GLEW_LIBRARIES})
-endif()
+if (WIN32)
+    include_directories(${PROJECT_DIR}/include Libs/GLEW/include Libs/GLFW/include)
+    find_package(OpenGL REQUIRED)
+    include_directories(${OPENGL_INCLUDE_DIR})
+    
+    link_libraries(${OPENGL_gl_LIBRARY} "Libs/GLEW/lib/Win32/glew32.lib" "Libs/GLFW/lib-vc2015/glfw3.lib")
+endif(WIN32)
 
 file(GLOB SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 
@@ -26,5 +39,3 @@ if (${SUBDIRS_LEN} GREATER 0)
         endif()
     endforeach(SUBDIR)
 endif()
-
-target_link_libraries(${LIBNAME} ${OPENGL_gl_LIBRARY} glfw)
