@@ -10,7 +10,10 @@ namespace lyz { namespace graphics {
 
 	public:
 		Triangle(const math::vec2& v1, const math::vec2& v2, const math::vec2& v3);
+		Triangle(const math::vec2& v1, const math::vec2& v2, float height);
 		~Triangle();
+
+		;
 	};
 
 } }

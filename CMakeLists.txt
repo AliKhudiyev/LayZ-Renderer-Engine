@@ -1,58 +1,44 @@
-cmake_minimum_required(VERSION 3.1)
+cmake_minimum_required(VERSION 3.1.0)
 project(LayZ)
 
-macro(subdirlist RESULT CURDIR)
-    file(GLOB CHILDREN RELATIVE ${CURDIR} ${CURDIR}/*)
-    set(DIRLIST "")
-    foreach(CHILD ${CHILDREN})
-        if(IS_DIRECTORY ${CURDIR}/${CHILD})
-            list(APPEND DIRLIST ${CHILD})
-            message(${CURDIR}/${CHILD})
-        endif()
-    endforeach()
-    set(${RESULT} ${DIRLIST})
-endmacro()
-
-list(APPEND CMAKE_CXX_FLAGS "-Wall -Wextra")
+# list(APPEND CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(PROJECT_DIR "LayZ")
-set(CMAKE_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${PROJECT_DIR}/src)
+set(PROJECT_PARENT_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+set(PROJECT_DIR "${PROJECT_PARENT_DIR}/LayZ")
+set(CMAKE_SOURCE_DIR ${PROJECT_DIR}/src)
 set(EXECUTABLE_NAME "layz")
 
-if(UNIX)
-    include_directories(${PROJECT_DIR}/include)
+include_directories(${PROJECT_DIR}/include ${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/include ${PROJECT_PARENT_DIR}/Libs/GLFW/glfw-3.3.2/include)
 
-    find_package(OpenGL REQUIRED)
-    include_directories(${OPENGL_INCLUDE_DIR})
-    
+find_package(OpenGL REQUIRED)
+include_directories(${OPENGL_INCLUDE_DIR})
+
+if (UNIX)
+    message("UNIX settings")
+
     find_package(glfw3 REQUIRED)
-    
     find_package(GLEW REQUIRED)
     if (GLEW_FOUND)
         include_directories(${GLEW_INCLUDE_DIRS})
+        link_libraries(${GLEW_LIBRARIES})
     endif()
-    
-    link_libraries(${OPENGL_gl_LIBRARY} ${GLEW_LIBRARIES} glfw)
-endif(UNIX)
+endif()
 
 if (WIN32)
-    include_directories(${PROJECT_DIR}/include Libs/GLEW/include Libs/GLFW/include)
-    find_package(OpenGL REQUIRED)
-    include_directories(${OPENGL_INCLUDE_DIR})
-    
-    link_libraries(${OPENGL_gl_LIBRARY} "Libs/GLEW/lib/Win32/glew32.lib" "Libs/GLFW/lib-vc2015/glfw3.lib")
-endif(WIN32)
+    message("Windows setting")
 
-file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/*.cpp)
+    add_compile_definitions("GLEW_STATIC")
 
-add_executable(${EXECUTABLE_NAME} ${SOURCES})
+    add_subdirectory(${PROJECT_PARENT_DIR}/Libs/GLFW/glfw-3.3.2)
 
-subdirlist(SUBDIRS ${CMAKE_SOURCE_DIR})
-foreach(SUBDIR ${SUBDIRS})
-    if (EXISTS ${CMAKE_SOURCE_DIR}/${SUBDIR}/CMakeLists.txt)
-        add_subdirectory(${CMAKE_SOURCE_DIR}/${SUBDIR})
-        target_link_libraries(${EXECUTABLE_NAME} ${SUBDIR})
-    endif()
-endforeach(SUBDIR)
+    include_directories(${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/include/GL)
+    link_libraries(${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/lib/libglew32.a)
+endif()
+
+file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/*.cpp ${CMAKE_SOURCE_DIR}/*/*.cpp ${CMAKE_SOURCE_DIR}/*/*/*.cpp)
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_link_libraries(${PROJECT_NAME} ${OPENGL_gl_LIBRARY} glfw)
