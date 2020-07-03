@@ -19,6 +19,8 @@ int main() {
 
 	Window* win = new Window("BIG KAMAL", 640, 480);
 
+	//glfwSwapInterval(0);
+
 	Shader* shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
 	shader->enable();
 
