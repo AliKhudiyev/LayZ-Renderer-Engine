@@ -27,19 +27,14 @@ int main() {
 
 	//glfwSwapInterval(0);
 
+	Shader* shd = new Shader("src/shaders/shader01.glsl");
+
 	Shader* shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
 	shader->enable();
 
-	float vertices[] = {
-		-0.5, -0.5, 0.0,	1.0, 1.0, 0.0, 1.0,
-		0.5, -0.5, 0.0,		1.0, 1.0, 0.0, 1.0,
-		0.5, 0.5, 0.0,		0.0, 0.0, 1.0, 1.0,
-		-0.5, 0.5, 0.0,		0.0, 0.0, 1.0, 1.0
-	};
-
 	Renderer* renderer = Renderer::getRenderer();
 	InstanceRenderer* instanceRenderer = InstanceRenderer::getRenderer();
-	PixelRenderer* pixelRenderer = PixelRenderer::getRenderer(WIDTH, HEIGHT);
+	//PixelRenderer* pixelRenderer = PixelRenderer::getRenderer(WIDTH, HEIGHT);
 
 	vector<coord2_t> coords{
 		LYZ_COORD2(-0.5, 0.5),
@@ -90,8 +85,8 @@ int main() {
 	Renderable* plane = new Renderable(pcoords);
 	plane->setColor(LYZ_COLOR3(0.0, 1.0, 0.0));
 
-	pixelRenderer->setPixelWidth(40);
-	pixelRenderer->setPixelHeight(40);
+	//pixelRenderer->setPixelWidth(40);
+	//pixelRenderer->setPixelHeight(40);
 
 	while (win->isRunning())
 	{
@@ -137,7 +132,7 @@ int main() {
 					r = 0.0;
 					g = 1.0;
 				}
-				pixelRenderer->setPixelAt(0, 0, LYZ_COLOR3(1.0, 1.0, 1.0));
+				//pixelRenderer->setPixelAt(0, 0, LYZ_COLOR3(1.0, 1.0, 1.0));
 				//pixelRenderer->setPixelAt(0, 1, LYZ_COLOR3(0.0, 1.0, 0.0));
 
 				//pixelRenderer->setPixelAt(1, 0, LYZ_COLOR3(0.0, 0.0, 1.0));
@@ -145,7 +140,7 @@ int main() {
 			}
 		}
 		// cout << pixelRenderer->getPixelAt(100) << endl;
-		pixelRenderer->draw();
+		//pixelRenderer->draw();
 
 		win->onUpdate();
 	}

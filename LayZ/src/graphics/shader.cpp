@@ -9,6 +9,11 @@
 
 namespace lyz { namespace graphics {
 
+	Shader::Shader(const char * shaderpath)
+	{
+		std::vector<std::string> contexts = utils::FileParser::mread(shaderpath);
+	}
+
 	Shader::Shader(const char * vertexpath, const char * fragmentpath) :
 		m_vertexpath(vertexpath), m_fragmentpath(fragmentpath)
 	{

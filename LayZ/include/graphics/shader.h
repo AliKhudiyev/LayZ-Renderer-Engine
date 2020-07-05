@@ -22,6 +22,7 @@ namespace lyz { namespace graphics {
 		const char *m_vertexpath, *m_fragmentpath;
 
 	public:
+		Shader(const char* shaderpath);
 		Shader(const char* vertexpath, const char* fragmentpath);
 		~Shader();
 

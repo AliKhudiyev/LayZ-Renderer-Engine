@@ -157,4 +157,7 @@
     <None Include="src\shaders\vertex.glsl" />
     <None Include="src\shaders\fragment.glsl" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\shaders\shader01.glsl" />
+  </ItemGroup>
 </Project>
