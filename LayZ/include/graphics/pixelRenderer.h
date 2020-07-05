@@ -8,7 +8,7 @@ namespace lyz { namespace graphics {
 	class PixelRenderer : public Renderer {
 	private:
 		unsigned m_width, m_height;
-		float m_pixelWidth = 1.0, m_pixelHeight = 1.0;
+		unsigned m_pixelWidth, m_pixelHeight;
 		std::vector<Rectangle*> m_pixels;
 
 		static PixelRenderer* renderer;
@@ -29,8 +29,8 @@ namespace lyz { namespace graphics {
 		inline void store(const Renderable* renderable) override {}
 		void draw() override;
 
-		void setPixelWidth(float width);
-		void setPixelHeight(float height);
+		void setPixelWidth(unsigned width);
+		void setPixelHeight(unsigned height);
 		void setPixelAt(unsigned x, unsigned y, const color_t& color);
 		void setPixelAt(unsigned index, const color_t& color);
 		void setPixelAt(unsigned x, unsigned y, const color3_t& color);

@@ -18,9 +18,12 @@ using namespace lyz;
 using namespace graphics;
 using namespace utils;
 
+#define WIDTH 640
+#define HEIGHT 480
+
 int main() {
 
-	Window* win = new Window("BIG KAMAL", 100, 100);
+	Window* win = new Window("BIG KAMAL", WIDTH, HEIGHT);
 
 	//glfwSwapInterval(0);
 
@@ -36,7 +39,7 @@ int main() {
 
 	Renderer* renderer = Renderer::getRenderer();
 	InstanceRenderer* instanceRenderer = InstanceRenderer::getRenderer();
-	PixelRenderer* pixelRenderer = PixelRenderer::getRenderer(100, 100);
+	PixelRenderer* pixelRenderer = PixelRenderer::getRenderer(WIDTH, HEIGHT);
 
 	vector<coord2_t> coords{
 		LYZ_COORD2(-0.5, 0.5),
@@ -87,14 +90,8 @@ int main() {
 	Renderable* plane = new Renderable(pcoords);
 	plane->setColor(LYZ_COLOR3(0.0, 1.0, 0.0));
 
-	renderer->setShader(shader);
-	shader->setUniform("model",
-		math::mat4::ortho(
-			0.f, 100.0,
-			100.0, 0.f,
-			-1.f, 1.f
-		)
-	);
+	pixelRenderer->setPixelWidth(40);
+	pixelRenderer->setPixelHeight(40);
 
 	while (win->isRunning())
 	{
@@ -105,10 +102,10 @@ int main() {
 		// renderer->store(plane);
 		//renderer->draw();
 
-		Rectangle* rect = new Rectangle(LYZ_COORD2(0.0, 0.0), 0.5, 0.5);
-		rect->setColor(LYZ_COLOR3(1.0, 0.0, 0.0));
-		renderer->store(rect);
-		renderer->draw();
+		//Rectangle* rect = new Rectangle(LYZ_COORD2(0.0, 0.0), 50.0, 50.0);
+		//rect->setColor(LYZ_COLOR3(1.0, 0.0, 0.0));
+		//renderer->store(rect);
+		//renderer->draw();
 
 		Debugger::showFPS(1.0);
 		//instanceRenderer->store(sprite);
@@ -117,9 +114,38 @@ int main() {
 		//instanceRenderer->store(triangle2);
 		//instanceRenderer->draw();
 
-		//pixelRenderer->setPixelAt(0, LYZ_COLOR3(0.0, 1.0, 0.0));
+		float r, g, b;
+		for (unsigned i = 0; i < HEIGHT; ++i) {
+			for (unsigned j = 0; j < WIDTH; ++j) {
+				if (i < 150) {
+					if (j < 50) {
+						b = 0.0;
+					}
+					else {
+						b = 1.0;
+					}
+					r = 1.0;
+					g = 0.0;
+				}
+				else {
+					if (j < 50) {
+						b = 0.0;
+					}
+					else {
+						b = 1.0;
+					}
+					r = 0.0;
+					g = 1.0;
+				}
+				pixelRenderer->setPixelAt(0, 0, LYZ_COLOR3(1.0, 1.0, 1.0));
+				//pixelRenderer->setPixelAt(0, 1, LYZ_COLOR3(0.0, 1.0, 0.0));
+
+				//pixelRenderer->setPixelAt(1, 0, LYZ_COLOR3(0.0, 0.0, 1.0));
+				//pixelRenderer->setPixelAt(1, 1, LYZ_COLOR3(1.0, 1.0, 1.0));
+			}
+		}
 		// cout << pixelRenderer->getPixelAt(100) << endl;
-		//pixelRenderer->draw();
+		pixelRenderer->draw();
 
 		win->onUpdate();
 	}

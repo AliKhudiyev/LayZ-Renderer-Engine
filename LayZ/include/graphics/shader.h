@@ -179,7 +179,7 @@ namespace lyz { namespace graphics {
 	inline void Shader::setUniform(const char * varname, const math::mat4 & mat)
 	{
 		GLint location = getUniformLocation(varname);
-		LYZ_CALL(glUniformMatrix4fv(location, 1, GL_FALSE, mat.data));
+		LYZ_CALL(glUniformMatrix4fv(location, 1, GL_TRUE, mat.data));
 	}
 	
 } }
