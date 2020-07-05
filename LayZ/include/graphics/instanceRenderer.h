@@ -10,12 +10,18 @@ namespace lyz { namespace graphics {
 
 		static InstanceRenderer* renderer;
 
+		// Shader* m_shaders[LYZ_RENDERER_MAX_SHADERS];
+		Shader* m_shader; // contains only vertex and fragment shaders
+
 	private:
-		InstanceRenderer() = default;
+		InstanceRenderer();
 
 	public:
+		~InstanceRenderer();
+
 		static InstanceRenderer* getRenderer();
 
+		void setShader(const char* vertexpath, const char* fragmentpath);
 		void store(const Renderable* renderable) override;
 		void draw() override;
 	};

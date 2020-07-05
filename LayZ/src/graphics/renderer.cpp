@@ -9,9 +9,20 @@ namespace lyz { namespace graphics {
 		m_vertexBuffer(new VertexBuffer()),
 		m_indexBuffer(new IndexBuffer()),
 
-		m_indices(new unsigned[LYZ_RENDERER_MAX_INDICES])
+		m_indices(new unsigned[LYZ_RENDERER_MAX_INDICES]),
+
+		m_shader(new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl"))
 	{
 		init();
+	}
+
+	void Renderer::setShader(Shader * shader)
+	{
+		if (!shader) {
+			std::cerr << "ERROR[setting shader]: null shader pointer!\n";
+			assert(false);
+		}
+		m_shader = shader;
 	}
 	
 	Renderer::~Renderer()
@@ -21,6 +32,7 @@ namespace lyz { namespace graphics {
 		delete m_indexBuffer;
 
 		delete[] m_indices;
+		delete m_shader;
 	}
 
 	Renderer * Renderer::getRenderer()
@@ -31,6 +43,11 @@ namespace lyz { namespace graphics {
 		return Renderer::renderer;
 	}
 	
+	void Renderer::setShader(const char * vertexpath, const char * fragmentpath)
+	{
+		m_shader->load(vertexpath, fragmentpath);
+	}
+
 	void Renderer::store(const Renderable* renderable)
 	{
 		setStoreStatus(LYZ_RENDERER_STORE_START);
@@ -62,9 +79,11 @@ namespace lyz { namespace graphics {
 
 		m_vertexArray->enable();
 		m_indexBuffer->enable();
+		m_shader->enable();
 
 		LYZ_CALL(glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, nullptr));
 
+		m_shader->disable();
 		m_indexBuffer->disable();
 		m_vertexArray->disable();
 		

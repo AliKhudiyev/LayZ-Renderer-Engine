@@ -14,6 +14,26 @@ namespace lyz { namespace graphics {
 	{
 		init();
 
+		load(vertexpath, fragmentpath);
+	}
+
+	Shader::~Shader()
+	{
+		LYZ_CALL(glDeleteProgram(m_ID));
+	}
+
+	void Shader::enable() const
+	{
+		LYZ_CALL(glUseProgram(m_ID));
+	}
+
+	void Shader::disable() const
+	{
+		LYZ_CALL(glUseProgram(0));
+	}
+
+	void Shader::load(const char * vertexpath, const char * fragmentpath)
+	{
 		// Vertex Shader
 		GLuint vertex = LYZ_CALL(glCreateShader(GL_VERTEX_SHADER));
 
@@ -69,21 +89,6 @@ namespace lyz { namespace graphics {
 			std::cout << "ERROR[shader]:program linking failed!\n" << infoLog << std::endl;
 		}
 		LYZ_CALL(glDeleteShader(fragment));
-	}
-
-	Shader::~Shader()
-	{
-		LYZ_CALL(glDeleteProgram(m_ID));
-	}
-
-	void Shader::enable() const
-	{
-		LYZ_CALL(glUseProgram(m_ID));
-	}
-
-	void Shader::disable() const
-	{
-		LYZ_CALL(glUseProgram(0));
 	}
 
 	void Shader::init()

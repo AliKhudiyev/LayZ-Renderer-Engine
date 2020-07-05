@@ -27,7 +27,8 @@ if (UNIX)
 endif()
 
 if (WIN32)
-    message("Windows setting")
+    message("Windows settings")
+    message("Respects to all windows developers, but this os sucks so bad!")
 
     add_compile_definitions("GLEW_STATIC")
 

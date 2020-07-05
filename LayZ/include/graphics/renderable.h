@@ -18,18 +18,24 @@ using color3_t = lyz::math::vec3;
 namespace lyz { namespace graphics {
 
 	class Renderable {
-	private:
+	protected:
 		std::vector<coord_t> m_coords; // clock-wise coords
 		color_t m_color;
+
+	protected:
+		Renderable() = default;
 
 	public:
 		Renderable(const std::vector<coord_t>& coords);
 		Renderable(const std::vector<coord2_t>& coords);
 		~Renderable();
 
+		virtual void setCoords(const std::vector<coord_t>& coords);
+		virtual void setCoords(const std::vector<coord2_t>& coords);
+		virtual void setCoordAt(unsigned index, const coord_t& coord);
+		virtual void setCoordAt(unsigned index, const coord2_t& coord);
 		virtual void setColor(const color_t& color);
 		virtual void setColor(const color3_t& color);
-		virtual void setGradientColor() {};
 
 		inline const std::vector<coord_t>& getCoords() const { return m_coords; }
 		inline const math::vec4& getColor() const { return m_color; }

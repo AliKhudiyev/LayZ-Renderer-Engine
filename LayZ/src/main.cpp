@@ -9,6 +9,9 @@
 #include "graphics/instanceRenderer.h"
 #include "graphics/pixelRenderer.h"
 
+#include "graphics/triangle.h"
+#include "graphics/rectangle.h"
+
 using namespace std;
 
 using namespace lyz;
@@ -17,7 +20,7 @@ using namespace utils;
 
 int main() {
 
-	Window* win = new Window("BIG KAMAL", 640, 480);
+	Window* win = new Window("BIG KAMAL", 100, 100);
 
 	//glfwSwapInterval(0);
 
@@ -33,7 +36,7 @@ int main() {
 
 	Renderer* renderer = Renderer::getRenderer();
 	InstanceRenderer* instanceRenderer = InstanceRenderer::getRenderer();
-	PixelRenderer* pixelRenderer = PixelRenderer::getRenderer(640, 480);
+	PixelRenderer* pixelRenderer = PixelRenderer::getRenderer(100, 100);
 
 	vector<coord2_t> coords{
 		LYZ_COORD2(-0.5, 0.5),
@@ -84,6 +87,15 @@ int main() {
 	Renderable* plane = new Renderable(pcoords);
 	plane->setColor(LYZ_COLOR3(0.0, 1.0, 0.0));
 
+	renderer->setShader(shader);
+	shader->setUniform("model",
+		math::mat4::ortho(
+			0.f, 100.0,
+			100.0, 0.f,
+			-1.f, 1.f
+		)
+	);
+
 	while (win->isRunning())
 	{
 		//renderer->store(sprite);
@@ -93,16 +105,21 @@ int main() {
 		// renderer->store(plane);
 		//renderer->draw();
 
-		Debugger::showFPS(1.0);
-		instanceRenderer->store(sprite);
-		instanceRenderer->store(sprite2);
-		instanceRenderer->store(triangle);
-		instanceRenderer->store(triangle2);
-		instanceRenderer->draw();
+		Rectangle* rect = new Rectangle(LYZ_COORD2(0.0, 0.0), 0.5, 0.5);
+		rect->setColor(LYZ_COLOR3(1.0, 0.0, 0.0));
+		renderer->store(rect);
+		renderer->draw();
 
-		// pixelRenderer->setPixelAt(100, LYZ_COLOR3(1.0, 0.0, 0.0));
+		Debugger::showFPS(1.0);
+		//instanceRenderer->store(sprite);
+		//instanceRenderer->store(sprite2);
+		//instanceRenderer->store(triangle);
+		//instanceRenderer->store(triangle2);
+		//instanceRenderer->draw();
+
+		//pixelRenderer->setPixelAt(0, LYZ_COLOR3(0.0, 1.0, 0.0));
 		// cout << pixelRenderer->getPixelAt(100) << endl;
-		// pixelRenderer->draw();
+		//pixelRenderer->draw();
 
 		win->onUpdate();
 	}

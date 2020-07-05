@@ -1,20 +1,23 @@
 #pragma once
 
 #include "graphics/renderer.h"
+#include "graphics/rectangle.h"
 
 namespace lyz { namespace graphics {
 
 	class PixelRenderer : public Renderer {
 	private:
 		unsigned m_width, m_height;
-		color_t* m_pixelSpace;
-
-		math::mat4 m_transformation;
+		float m_pixelWidth = 1.0, m_pixelHeight = 1.0;
+		std::vector<Rectangle*> m_pixels;
 
 		static PixelRenderer* renderer;
 
+		// Shader* m_shaders[LYZ_RENDERER_MAX_SHADERS];
+		Shader* m_shader; // contains only vertex and fragment shaders
+
 	private:
-		PixelRenderer() = default;
+		PixelRenderer();
 		PixelRenderer(unsigned width, unsigned height);
 
 	public:
@@ -22,15 +25,20 @@ namespace lyz { namespace graphics {
 
 		static PixelRenderer* getRenderer(unsigned width, unsigned height);
 
+		void setShader(const char* vertexpath, const char* fragmentpath) override;
 		inline void store(const Renderable* renderable) override {}
 		void draw() override;
 
+		void setPixelWidth(float width);
+		void setPixelHeight(float height);
 		void setPixelAt(unsigned x, unsigned y, const color_t& color);
 		void setPixelAt(unsigned index, const color_t& color);
 		void setPixelAt(unsigned x, unsigned y, const color3_t& color);
 		void setPixelAt(unsigned index, const color3_t& color);
 		const color_t& getPixelAt(unsigned x, unsigned y) const;
 		const color_t& getPixelAt(unsigned index) const;
+	
+	private:
 		void updatePixels();
 	};
 

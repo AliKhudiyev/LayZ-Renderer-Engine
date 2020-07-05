@@ -146,8 +146,10 @@
     <ClCompile Include="src\graphics\buffers\vertexBuffer.cpp" />
     <ClCompile Include="src\graphics\event.cpp" />
     <ClCompile Include="src\graphics\pixelRenderer.cpp" />
+    <ClCompile Include="src\graphics\rectangle.cpp" />
     <ClCompile Include="src\graphics\renderable.cpp" />
     <ClCompile Include="src\graphics\renderer.cpp" />
+    <ClCompile Include="src\graphics\triangle.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
     <ClCompile Include="src\graphics\window.cpp" />
@@ -168,6 +170,7 @@
     <ClInclude Include="include\graphics\event.h" />
     <ClInclude Include="include\graphics\graphics.h" />
     <ClInclude Include="include\graphics\pixelRenderer.h" />
+    <ClInclude Include="include\graphics\rectangle.h" />
     <ClInclude Include="include\graphics\renderable.h" />
     <ClInclude Include="include\graphics\renderer.h" />
     <ClInclude Include="include\graphics\shader.h" />
@@ -183,7 +186,6 @@
     <ClInclude Include="include\utils\debug.h" />
     <ClInclude Include="include\utils\file.h" />
     <ClInclude Include="include\utils\utils.h" />
-    <ClInclude Include="src\graphics\triangle.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\fragment.glsl" />

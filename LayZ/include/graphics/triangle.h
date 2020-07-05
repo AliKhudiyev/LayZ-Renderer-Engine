@@ -9,8 +9,8 @@ namespace lyz { namespace graphics {
 		;
 
 	public:
-		Triangle(const math::vec2& v1, const math::vec2& v2, const math::vec2& v3);
-		Triangle(const math::vec2& v1, const math::vec2& v2, float height);
+		Triangle(const coord2_t& v1, const coord2_t& v2, const coord2_t& v3);
+		Triangle(const coord2_t& v1, const coord2_t& v2, float height);
 		~Triangle();
 
 		;

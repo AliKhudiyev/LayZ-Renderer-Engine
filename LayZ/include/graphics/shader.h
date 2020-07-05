@@ -8,6 +8,13 @@
 
 namespace lyz { namespace graphics {
 
+	enum ShaderType {
+		VERTEX = 0,
+		GEOMETRY,
+		RASTERIZATION,
+		FRAGMENT
+	};
+
 	class Shader {
 	private:
 		unsigned m_ID;
@@ -21,6 +28,8 @@ namespace lyz { namespace graphics {
 		void enable() const;
 		void disable() const;
 		
+		void load(const char* vertexpath, const char* fragmentpath);
+
 		template<typename T>
 		void setUniform(const char* varname, T val);
 		
