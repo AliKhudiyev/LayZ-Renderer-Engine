@@ -9,8 +9,15 @@
 
 namespace lyz { namespace graphics {
 
+	Shader::Shader()
+	{
+		init();
+	}
+
 	Shader::Shader(const char * shaderpath)
 	{
+		init();
+
 		std::vector<std::string> contexts = utils::FileParser::mread(shaderpath);
 	}
 
@@ -94,6 +101,53 @@ namespace lyz { namespace graphics {
 			std::cout << "ERROR[shader]:program linking failed!\n" << infoLog << std::endl;
 		}
 		LYZ_CALL(glDeleteShader(fragment));
+	}
+
+	void Shader::load(const char * shaderpath, ShaderType type)
+	{
+		GLenum shaderType;
+		switch (type) {
+		case ShaderType::VERTEX: shaderType = GL_VERTEX_SHADER;
+			break;
+		case ShaderType::TESSELATION_CONTROL: shaderType = GL_TESS_CONTROL_SHADER;
+			break;
+		case ShaderType::TESSELATION_EVALUATION: shaderType = GL_TESS_EVALUATION_SHADER;
+			break;
+		case ShaderType::GEOMETRY: shaderType = GL_GEOMETRY_SHADER;
+			break;
+		case ShaderType::FRAGMENT: shaderType = GL_FRAGMENT_SHADER;
+			break;
+		case ShaderType::COMPUTE: shaderType = GL_COMPUTE_SHADER;
+			break;
+		}
+
+		GLuint shader = LYZ_CALL(glCreateShader(shaderType));
+
+		std::string shader_str = utils::FileParser::read(shaderpath);
+		const char* shader_chrs = shader_str.c_str();
+
+		LYZ_CALL(glShaderSource(shader, 1, &shader_chrs, nullptr));
+		LYZ_CALL(glCompileShader(shader));
+
+		GLint success;
+		char infoLog[LYZ_INFOLOG_SIZE];
+		LYZ_CALL(glGetShaderiv(shader, GL_COMPILE_STATUS, &success));
+		if (!success)
+		{
+			LYZ_CALL(glGetShaderInfoLog(shader, LYZ_INFOLOG_SIZE, nullptr, infoLog));
+			std::cout << "ERROR[shader]:shader compilation failed!\n" << infoLog << std::endl;
+			assert(false);
+		};
+
+		LYZ_CALL(glAttachShader(m_ID, shader));
+		LYZ_CALL(glLinkProgram(m_ID));
+		LYZ_CALL(glGetProgramiv(m_ID, GL_LINK_STATUS, &success));
+		if (!success)
+		{
+			LYZ_CALL(glGetProgramInfoLog(m_ID, LYZ_INFOLOG_SIZE, nullptr, infoLog));
+			std::cout << "ERROR[shader]:program linking failed!\n" << infoLog << std::endl;
+		}
+		LYZ_CALL(glDeleteShader(shader));
 	}
 
 	void Shader::init()

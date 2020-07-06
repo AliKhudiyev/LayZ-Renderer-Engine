@@ -9,9 +9,7 @@ namespace lyz { namespace graphics {
 		std::vector<const Renderable*> m_renderables;
 
 		static InstanceRenderer* renderer;
-
-		// Shader* m_shaders[LYZ_RENDERER_MAX_SHADERS];
-		Shader* m_shader; // contains only vertex and fragment shaders
+		static Shader* shader;
 
 	private:
 		InstanceRenderer();
@@ -21,7 +19,8 @@ namespace lyz { namespace graphics {
 
 		static InstanceRenderer* getRenderer();
 
-		void setShader(const char* vertexpath, const char* fragmentpath);
+		void loadShader(const char* vertexpath, const char* fragmentpath) override;
+		void loadShader(const char* shaderpath, ShaderType type) override;
 		void store(const Renderable* renderable) override;
 		void draw() override;
 	};

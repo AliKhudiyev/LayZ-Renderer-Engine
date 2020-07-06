@@ -82,10 +82,10 @@ namespace lyz { namespace utils {
 			}
 		}
 
-		std::cout << "VERTEX============\n=" << mcontext[0] << "\n\n";
+		/*std::cout << "VERTEX============\n=" << mcontext[0] << "\n\n";
 		std::cout << "GEOMETRY============\n=" << mcontext[1] << "\n\n";
 		std::cout << "RASTERIZATION============\n=" << mcontext[2] << "\n\n";
-		std::cout << "FRAGMENT============\n=" << mcontext[3] << "\n\n";
+		std::cout << "FRAGMENT============\n=" << mcontext[3] << "\n\n";*/
 
 		return mcontext;
 	}

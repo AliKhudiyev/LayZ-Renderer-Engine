@@ -27,10 +27,10 @@ int main() {
 
 	//glfwSwapInterval(0);
 
-	Shader* shd = new Shader("src/shaders/shader01.glsl");
+	//Shader* shd = new Shader("src/shaders/shader01.glsl");
 
-	Shader* shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
-	shader->enable();
+	//Shader* shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
+	//shader->enable();
 
 	Renderer* renderer = Renderer::getRenderer();
 	InstanceRenderer* instanceRenderer = InstanceRenderer::getRenderer();
@@ -90,12 +90,14 @@ int main() {
 
 	while (win->isRunning())
 	{
-		//renderer->store(sprite);
+		renderer->clear();
+
+		renderer->store(sprite);
 		//renderer->store(sprite2);
 		//renderer->store(triangle2);
 		//renderer->store(triangle);
 		// renderer->store(plane);
-		//renderer->draw();
+		renderer->draw();
 
 		//Rectangle* rect = new Rectangle(LYZ_COORD2(0.0, 0.0), 50.0, 50.0);
 		//rect->setColor(LYZ_COLOR3(1.0, 0.0, 0.0));

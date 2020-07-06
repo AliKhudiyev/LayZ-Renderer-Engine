@@ -3,15 +3,16 @@
 namespace lyz {	namespace graphics {
 
 	InstanceRenderer* InstanceRenderer::renderer = nullptr;
+	Shader* InstanceRenderer::shader = nullptr;
 
 	InstanceRenderer::InstanceRenderer()
 	{
-		m_shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
+		InstanceRenderer::shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
 	}
 
 	InstanceRenderer::~InstanceRenderer()
 	{
-		delete m_shader;
+		delete InstanceRenderer::shader;
 	}
 
 	InstanceRenderer * lyz::graphics::InstanceRenderer::getRenderer()
@@ -22,9 +23,14 @@ namespace lyz {	namespace graphics {
 		return InstanceRenderer::renderer;
 	}
 
-	void InstanceRenderer::setShader(const char * vertexpath, const char * fragmentpath)
+	void InstanceRenderer::loadShader(const char * vertexpath, const char * fragmentpath)
 	{
-		m_shader->load(vertexpath, fragmentpath);
+		InstanceRenderer::shader->load(vertexpath, fragmentpath);
+	}
+
+	void InstanceRenderer::loadShader(const char * shaderpath, ShaderType type)
+	{
+		InstanceRenderer::shader->load(shaderpath, type);
 	}
 
 	void InstanceRenderer::store(const Renderable* renderable) {
@@ -32,10 +38,17 @@ namespace lyz {	namespace graphics {
 	}
 
 	void InstanceRenderer::draw() {
-		auto batchRenderer = Renderer::getRenderer();
-		for (const auto& renderable : m_renderables)
+		auto batchRenderer = Renderer::renderer;
+		auto batchShader = Renderer::shader;
+
+		Renderer::shader = InstanceRenderer::shader;
+
+		for (const auto& renderable : m_renderables) {
 			batchRenderer->store(renderable);
 			batchRenderer->draw();
+		}
+
+		Renderer::shader = batchShader;
 	}
 
 } }

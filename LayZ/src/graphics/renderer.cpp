@@ -3,26 +3,17 @@
 namespace lyz { namespace graphics {
 
 	Renderer* Renderer::renderer = nullptr;
+	Shader* Renderer::shader = nullptr;
 
 	Renderer::Renderer():
 		m_vertexArray(new VertexArray()),
 		m_vertexBuffer(new VertexBuffer()),
 		m_indexBuffer(new IndexBuffer()),
 
-		m_indices(new unsigned[LYZ_RENDERER_MAX_INDICES]),
-
-		m_shader(new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl"))
+		m_indices(new unsigned[LYZ_RENDERER_MAX_INDICES])
 	{
+		Renderer::shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
 		init();
-	}
-
-	void Renderer::setShader(Shader * shader)
-	{
-		if (!shader) {
-			std::cerr << "ERROR[setting shader]: null shader pointer!\n";
-			assert(false);
-		}
-		m_shader = shader;
 	}
 	
 	Renderer::~Renderer()
@@ -32,7 +23,7 @@ namespace lyz { namespace graphics {
 		delete m_indexBuffer;
 
 		delete[] m_indices;
-		delete m_shader;
+		delete Renderer::shader;
 	}
 
 	Renderer * Renderer::getRenderer()
@@ -43,9 +34,14 @@ namespace lyz { namespace graphics {
 		return Renderer::renderer;
 	}
 	
-	void Renderer::setShader(const char * vertexpath, const char * fragmentpath)
+	void Renderer::loadShader(const char * vertexpath, const char * fragmentpath)
 	{
-		m_shader->load(vertexpath, fragmentpath);
+		Renderer::shader->load(vertexpath, fragmentpath);
+	}
+
+	void Renderer::loadShader(const char * shaderpath, ShaderType type)
+	{
+		Renderer::shader->load(shaderpath, type);
 	}
 
 	void Renderer::store(const Renderable* renderable)
@@ -79,16 +75,21 @@ namespace lyz { namespace graphics {
 
 		m_vertexArray->enable();
 		m_indexBuffer->enable();
-		m_shader->enable();
+		Renderer::shader->enable();
 
 		LYZ_CALL(glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, nullptr));
 
-		m_shader->disable();
+		Renderer::shader->disable();
 		m_indexBuffer->disable();
 		m_vertexArray->disable();
 		
 		m_vertexCount = 0;
 		m_indexCount = 0;
+	}
+
+	void Renderer::clear()
+	{
+		LYZ_CALL(glClear(GL_COLOR_BUFFER_BIT));
 	}
 
 	void Renderer::setStoreStatus(renderer_status_t status)
@@ -109,7 +110,10 @@ namespace lyz { namespace graphics {
 	void Renderer::init()
 	{
 		m_vertexBuffer->setData(nullptr, LYZ_RENDERER_MAX_VERTICES_SIZE);
-		m_vertexBuffer->setLayout({3,4});
+		m_vertexBuffer->setLayout({
+			LYZ_VERTEX_COORD_ELEMENTS,
+			LYZ_VERTEX_COLOR_ELEMENTS
+		});
 	}
 
 } }

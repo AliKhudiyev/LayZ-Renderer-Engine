@@ -12,9 +12,7 @@ namespace lyz { namespace graphics {
 		std::vector<Rectangle*> m_pixels;
 
 		static PixelRenderer* renderer;
-
-		// Shader* m_shaders[LYZ_RENDERER_MAX_SHADERS];
-		Shader* m_shader; // contains only vertex and fragment shaders
+		static Shader* shader;
 
 	private:
 		PixelRenderer();
@@ -25,7 +23,8 @@ namespace lyz { namespace graphics {
 
 		static PixelRenderer* getRenderer(unsigned width, unsigned height);
 
-		void setShader(const char* vertexpath, const char* fragmentpath) override;
+		void loadShader(const char* vertexpath, const char* fragmentpath) override;
+		void loadShader(const char* shaderpath, ShaderType type) override;
 		inline void store(const Renderable* renderable) override {}
 		void draw() override;
 

@@ -48,7 +48,6 @@ namespace lyz { namespace graphics {
 	void Window::onUpdate() const
 	{
 		LYZ_CALL(glfwSwapBuffers(m_window));
-		LYZ_CALL(glClear(GL_COLOR_BUFFER_BIT));
 
 		LYZ_CALL(glfwPollEvents());
 	}
