@@ -17,7 +17,7 @@ if (UNIX)
 
     find_package(glfw3 REQUIRED)
     find_package(GLEW REQUIRED)
-    endif()
+endif()
 
 if (WIN32)
     message("Building for Windows...")
@@ -27,7 +27,7 @@ if (WIN32)
     add_compile_definitions("_USE_MATH_DEFINES")
 
     add_subdirectory(${PROJECT_PARENT_DIR}/Libs/GLFW/glfw-3.3.2)
-    set(${GLFW_INCLUDE_DIRS} ${PROJECT_PARENT_DIR}/Libs/GLFW/glfw-3.3.2/include)
+    set(GLFW_INCLUDE_DIRS ${PROJECT_PARENT_DIR}/Libs/GLFW/glfw-3.3.2/include)
 
     set(GLEW_INCLUDE_DIRS ${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/include)
     set(GLEW_LIBRARIES ${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/lib/libglew32.a)
@@ -66,14 +66,14 @@ target_include_directories(${EXECUTABLE_NAME}
             ${OPENGL_INCLUDE_DIR})
 
 target_link_libraries(${EXECUTABLE_NAME}
-        ${OPENGL_gl_LIBRARY}
         ${GLEW_LIBRARIES}
+        ${OPENGL_gl_LIBRARY}
         glfw)
 
 # -------------------- COMPILER FLAGS AND FEATURES --------------------
 set_target_properties(${EXECUTABLE_NAME}
         PROPERTIES
-            CXX_STANDARD 11
+            CXX_STANDARD 17
             CXX_STANDARD_REQUIRED YES
             CXX_EXTENSIONS NO
         FLAGS
