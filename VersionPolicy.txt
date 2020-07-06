@@ -1,0 +1,17 @@
+Version {major}.{minor}
+
+Major updates include:
+1. Any changes in abstraction level (i.e. deleting/creating classes)
+2. Any changes in workflow of low-level codes (low-level modification such as using glPoints to render pixels instead of high-level rectangles)
+3. Any added or deleted features (i.e. adding/removing another third-party library)
+4. Difference in disk space usage is more than 10 MB
+
+Minor updates include:
+1. Any inline bug fixes (in any level)
+2. Renaming or refactoring (in any level)
+3. Any modified features (in high level)
+
+Note: If any one condition is true in major section then it is considered as a major update even though there might be a minor update as well. 
+But if there is no major update and any one condition is true in minor section then it is considered as a minor update.
+
+Note: The version number begins with 1.0

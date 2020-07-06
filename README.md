@@ -46,19 +46,18 @@ using namespace std;
 
 int main() {
 
-    lyz::init();
-
-    lyz::Window win = lyz::Window("Example Window", 640, 480);
-    auto renderer2D = lyz::Renderer::getRenderer2D();
+    lyz::graphics::Window win = lyz::graphics::Window("Example Window", 640, 480);
+    auto renderer2D = lyz::graphics::Renderer::getRenderer2D();
     
+    Rectangle* rectangle = new Rectangle(0.0, 0.0, 320.0, 240.0);
+    rectangle->setColor(LYZ_COLOR3(0.0, 1.0, 1.0));
+
     while(win->isRunnning()) {
-        renderer2D.store(?);
+        renderer2D.store(rectangle);
         renderer2D.draw();
         win->onUpdate();
     }
     
-    lyz::deinit();
-
     return 0;
 }
 
