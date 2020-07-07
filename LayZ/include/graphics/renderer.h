@@ -34,7 +34,7 @@ namespace lyz { namespace graphics {
 	class Renderer {
 	private:
 		VertexArray* m_vertexArray;
-		VertexBuffer* m_vertexBuffer;
+		VertexBuffer* m_vertexBuffer, m_vertexBuffer4Lines, m_vertexBuffer4Points;
 		IndexBuffer* m_indexBuffer;
 
 		VertexData* m_vertexData;

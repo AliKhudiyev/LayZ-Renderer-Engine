@@ -5,7 +5,9 @@
 **LayZ** is a simple cross-platform renderer engine written in C/C++ using OpenGL specification. 
 
 
-## How to launch
+## Fire up the engine, make that LayZ work!
+
+Check [wiki](https://github.com/AliKhudiyev/LayZ-Renderer-Engine/wiki)(not completely prepared yet).
 
 <table>
 <thead>
@@ -37,7 +39,7 @@
 
 ## How to use
 
-There is a wiki(not completely prepared yet) that you can always open and check the detailed tutorials.
+There is a [wiki](https://github.com/AliKhudiyev/LayZ-Renderer-Engine/wiki)(not completely prepared yet) that you can always open and check the detailed tutorials.
 
 ```
 #include <layz.h>
@@ -47,14 +49,17 @@ using namespace std;
 int main() {
 
     lyz::graphics::Window win = lyz::graphics::Window("Example Window", 640, 480);
-    auto renderer2D = lyz::graphics::Renderer::getRenderer2D();
+    auto renderer = lyz::graphics::Renderer::getRenderer();
     
-    Rectangle* rectangle = new Rectangle(0.0, 0.0, 320.0, 240.0);
+    auto rectangle = new lyz::graphics::Rectangle(0.0, 0.0, 320.0, 240.0);
     rectangle->setColor(LYZ_COLOR3(0.0, 1.0, 1.0));
 
     while(win->isRunnning()) {
-        renderer2D.store(rectangle);
-        renderer2D.draw();
+        renderer->clear();
+
+        renderer->store(rectangle);
+        renderer->draw();
+        
         win->onUpdate();
     }
     

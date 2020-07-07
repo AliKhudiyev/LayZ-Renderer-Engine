@@ -17,9 +17,17 @@ using color3_t = lyz::math::vec3;
 
 namespace lyz { namespace graphics {
 
+	enum RenderableType {
+		POINT = 0,
+		LINE,
+		OTHER
+	};
+
 	class Renderable {
 	protected:
 		std::vector<coord_t> m_coords; // clock-wise coords
+		std::vector<coord_t> m_lineCoords;
+		std::vector<coord_t> m_pointCoords;
 		color_t m_color;
 
 	protected:
