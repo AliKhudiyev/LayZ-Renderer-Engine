@@ -18,11 +18,10 @@ namespace lyz { namespace graphics {
 
 		m_pixels.resize(width * height);
 
-		Rectangle::mod = LYZ_MOD_ADDITIVE;
 		for (unsigned i = 0, row = 0; row < height; ++i, row += m_pixelHeight) {
 			for (unsigned j = 0, col = 0; col < width; ++j, col += m_pixelWidth) {
 				m_pixels[i * width + j] = new Rectangle(
-					LYZ_COORD2(static_cast<float>(m_pixelWidth) * j, static_cast<float>(m_pixelHeight) * i), 
+					LYZ_COORD2(static_cast<float>(m_pixelWidth) * j, static_cast<float>(m_pixelHeight) * (i + 1)), 
 					static_cast<float>(m_pixelWidth), static_cast<float>(m_pixelHeight)
 				);
 			}
@@ -40,6 +39,7 @@ namespace lyz { namespace graphics {
 
 	PixelRenderer::~PixelRenderer()
 	{
+		delete PixelRenderer::renderer;
 		delete PixelRenderer::shader;
 	}
 	

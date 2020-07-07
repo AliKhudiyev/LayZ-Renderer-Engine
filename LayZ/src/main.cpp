@@ -91,13 +91,13 @@ int main() {
 	while (win->isRunning())
 	{
 		renderer->clear();
-
-		renderer->store(sprite);
+		
+		//renderer->store(sprite);
 		//renderer->store(sprite2);
 		//renderer->store(triangle2);
 		//renderer->store(triangle);
 		// renderer->store(plane);
-		renderer->draw();
+		//renderer->draw();
 
 		//Rectangle* rect = new Rectangle(LYZ_COORD2(0.0, 0.0), 50.0, 50.0);
 		//rect->setColor(LYZ_COLOR3(1.0, 0.0, 0.0));
@@ -111,38 +111,13 @@ int main() {
 		//instanceRenderer->store(triangle2);
 		//instanceRenderer->draw();
 
-		float r, g, b;
-		for (unsigned i = 0; i < HEIGHT; ++i) {
-			for (unsigned j = 0; j < WIDTH; ++j) {
-				if (i < 150) {
-					if (j < 50) {
-						b = 0.0;
-					}
-					else {
-						b = 1.0;
-					}
-					r = 1.0;
-					g = 0.0;
-				}
-				else {
-					if (j < 50) {
-						b = 0.0;
-					}
-					else {
-						b = 1.0;
-					}
-					r = 0.0;
-					g = 1.0;
-				}
-				//pixelRenderer->setPixelAt(0, 0, LYZ_COLOR3(1.0, 1.0, 1.0));
-				//pixelRenderer->setPixelAt(0, 1, LYZ_COLOR3(0.0, 1.0, 0.0));
-
-				//pixelRenderer->setPixelAt(1, 0, LYZ_COLOR3(0.0, 0.0, 1.0));
-				//pixelRenderer->setPixelAt(1, 1, LYZ_COLOR3(1.0, 1.0, 1.0));
-			}
-		}
-		// cout << pixelRenderer->getPixelAt(100) << endl;
+		//pixelRenderer->setPixelAt(0, 0, LYZ_COLOR3(1.0, 1.0, 1.0));
 		//pixelRenderer->draw();
+
+		auto tri = new Triangle(0.0, 0.0, 0.5, 1.0);
+		tri->setColor(LYZ_COLOR3(0.0, 1.0, 1.0));
+		renderer->store(tri);
+		renderer->draw();
 
 		win->onUpdate();
 	}

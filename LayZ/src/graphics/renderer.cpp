@@ -23,6 +23,8 @@ namespace lyz { namespace graphics {
 		delete m_indexBuffer;
 
 		delete[] m_indices;
+
+		delete Renderer::renderer;
 		delete Renderer::shader;
 	}
 
@@ -98,12 +100,12 @@ namespace lyz { namespace graphics {
 		m_rendererStatus = status;
 
 		if (status == LYZ_RENDERER_STORE_START) {
-			m_vertexBuffer->enable(); // enable vertex buffer
+			m_vertexBuffer->enable();
 			LYZ_CALL(m_vertexData = reinterpret_cast<VertexData*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY)));
 		}
 		else {
 			LYZ_CALL(glUnmapBuffer(GL_ARRAY_BUFFER));
-			m_vertexBuffer->disable(); // disable vertex buffer
+			m_vertexBuffer->disable();
 		}
 	}
 

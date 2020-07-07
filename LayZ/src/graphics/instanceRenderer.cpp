@@ -12,6 +12,7 @@ namespace lyz {	namespace graphics {
 
 	InstanceRenderer::~InstanceRenderer()
 	{
+		delete InstanceRenderer::renderer;
 		delete InstanceRenderer::shader;
 	}
 
