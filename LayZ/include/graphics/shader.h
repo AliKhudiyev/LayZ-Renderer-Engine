@@ -19,12 +19,12 @@ namespace lyz { namespace graphics {
 
 	class Shader {
 	private:
-		unsigned m_ID;
 
 		const char *m_vertexpath, *m_fragmentpath;
 		std::unordered_map<std::string, GLint> m_uniforms;
 
 	public:
+		unsigned m_ID;
 		Shader();
 		Shader(const char* vertexpath, const char* fragmentpath);
 		~Shader();
@@ -46,6 +46,9 @@ namespace lyz { namespace graphics {
 
 		template<typename T>
 		void setUniform(const char* varname, const math::vec4& vec);
+
+		template<typename T>
+		void setUniform(const char* varname, const T* data, int count);
 
 		void setUniform(const char* varname, const math::mat4& mat);
 		
@@ -275,6 +278,51 @@ namespace lyz { namespace graphics {
 			static_cast<unsigned>(vec.data[2]), 
 			static_cast<unsigned>(vec.data[3])
 		));
+	}
+
+	template<>
+	inline void Shader::setUniform<float>(const char* varname, const float* data, int count)
+	{
+		GLint location;
+		auto pair = m_uniforms.find(varname);
+		if (pair != m_uniforms.cend()) {
+			location = pair->second;
+		}
+		else {
+			location = getUniformLocation(varname);
+			m_uniforms[varname] = location;
+		}
+		LYZ_CALL(glUniform1fv(location, count, data));
+	}
+
+	template<>
+	inline void Shader::setUniform<int>(const char* varname, const int* data, int count)
+	{
+		GLint location;
+		auto pair = m_uniforms.find(varname);
+		if (pair != m_uniforms.cend()) {
+			location = pair->second;
+		}
+		else {
+			location = getUniformLocation(varname);
+			m_uniforms[varname] = location;
+		}
+		LYZ_CALL(glUniform1iv(location, count, data));
+	}
+
+	template<>
+	inline void Shader::setUniform<unsigned>(const char* varname, const unsigned* data, int count)
+	{
+		GLint location;
+		auto pair = m_uniforms.find(varname);
+		if (pair != m_uniforms.cend()) {
+			location = pair->second;
+		}
+		else {
+			location = getUniformLocation(varname);
+			m_uniforms[varname] = location;
+		}
+		LYZ_CALL(glUniform1uiv(location, count, data));
 	}
 
 	inline void Shader::setUniform(const char * varname, const math::mat4 & mat)

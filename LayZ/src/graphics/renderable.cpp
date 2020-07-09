@@ -1,18 +1,21 @@
 #include "graphics/renderable.h"
 
-#include "utils/debug.h"
+#include "utils/utils.h"
 
 namespace lyz { namespace graphics {
 
 	Renderable::Renderable(const std::vector<coord_t>& coords):
-		m_coords(coords)
+		m_coords(coords), m_texture(nullptr)
 	{
+		m_texCoords.resize(coords.size());
 	}
 	
-	Renderable::Renderable(const std::vector<coord2_t>& coords)
+	Renderable::Renderable(const std::vector<coord2_t>& coords):
+		m_texture(nullptr)
 	{
 		for (const auto& coord : coords)
 			m_coords.push_back(coord_t(coord, 0.0));
+		m_texCoords = utils::tell_texCoords(coords);
 	}
 
 	Renderable::~Renderable()
@@ -22,6 +25,7 @@ namespace lyz { namespace graphics {
 	void Renderable::setCoords(const std::vector<coord_t>& coords)
 	{
 		m_coords = coords;
+		m_texCoords.resize(coords.size());
 	}
 
 	void Renderable::setCoords(const std::vector<coord2_t>& coords)
@@ -30,6 +34,7 @@ namespace lyz { namespace graphics {
 		for (const auto& coord : coords) {
 			m_coords.push_back(coord);
 		}
+		m_texCoords.resize(coords.size());
 	}
 
 	void Renderable::setCoordAt(unsigned index, const coord_t & coord)
@@ -60,6 +65,16 @@ namespace lyz { namespace graphics {
 	void Renderable::setColor(const color3_t & color)
 	{
 		m_color = color_t(color, 1.0);
+	}
+
+	void Renderable::setTexture(const Texture * texture)
+	{
+		if (!texture) {
+			std::cerr << "ERROR[setting texture]: Null texture!\n";
+			assert(false);
+		}
+		m_texture = texture;
+		m_texCoords = utils::tell_texCoords(m_coords);
 	}
 
 } }

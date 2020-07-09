@@ -76,7 +76,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libs\GLFW\include;$(SolutionDir)Libs\GLEW\include;$(SolutionDIr)LayZ\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)LayZ\include\vendor;$(SolutionDir)Libs\GLFW\include;$(SolutionDir)Libs\GLEW\include;$(SolutionDIr)LayZ\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);GLEW_STATIC;_USE_MATH_DEFINES</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libs\GLFW\include;$(SolutionDir)Libs\GLEW\include;$(SolutionDIr)LayZ\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)LayZ\include\vendor;$(SolutionDir)Libs\GLFW\include;$(SolutionDir)Libs\GLEW\include;$(SolutionDIr)LayZ\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);GLEW_STATIC;_USE_MATH_DEFINES</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -108,7 +108,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libs\GLFW\include;$(SolutionDir)Libs\GLEW\include;$(SolutionDIr)LayZ\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)LayZ\include\vendor;$(SolutionDir)Libs\GLFW\include;$(SolutionDir)Libs\GLEW\include;$(SolutionDIr)LayZ\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);GLEW_STATIC;_USE_MATH_DEFINES</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -127,7 +127,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Libs\GLFW\include;$(SolutionDir)Libs\GLEW\include;$(SolutionDIr)LayZ\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)LayZ\include\vendor;$(SolutionDir)Libs\GLFW\include;$(SolutionDir)Libs\GLEW\include;$(SolutionDIr)LayZ\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);GLEW_STATIC;_USE_MATH_DEFINES</PreprocessorDefinitions>
     </ClCompile>
     <Link>
@@ -139,16 +139,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="include\vendor\stb\stb_vorbis.c" />
     <ClCompile Include="src\graphics\instanceRenderer.cpp" />
     <ClCompile Include="src\graphics\buffers\buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\indexBuffer.cpp" />
     <ClCompile Include="src\graphics\buffers\vertexArray.cpp" />
     <ClCompile Include="src\graphics\buffers\vertexBuffer.cpp" />
     <ClCompile Include="src\graphics\event.cpp" />
+    <ClCompile Include="src\graphics\line.cpp" />
     <ClCompile Include="src\graphics\pixelRenderer.cpp" />
+    <ClCompile Include="src\graphics\point.cpp" />
     <ClCompile Include="src\graphics\rectangle.cpp" />
     <ClCompile Include="src\graphics\renderable.cpp" />
     <ClCompile Include="src\graphics\renderer.cpp" />
+    <ClCompile Include="src\graphics\texture.cpp" />
     <ClCompile Include="src\graphics\triangle.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\graphics\shader.cpp" />
@@ -159,6 +163,7 @@
     <ClCompile Include="src\math\vec4.cpp" />
     <ClCompile Include="src\utils\debug.cpp" />
     <ClCompile Include="src\utils\file.cpp" />
+    <ClCompile Include="src\utils\processing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\entry.h" />
@@ -169,12 +174,15 @@
     <ClInclude Include="include\graphics\buffers\vertexBuffer.h" />
     <ClInclude Include="include\graphics\event.h" />
     <ClInclude Include="include\graphics\graphics.h" />
+    <ClInclude Include="include\graphics\line.h" />
     <ClInclude Include="include\graphics\pixelRenderer.h" />
+    <ClInclude Include="include\graphics\point.h" />
     <ClInclude Include="include\graphics\rectangle.h" />
     <ClInclude Include="include\graphics\renderable.h" />
     <ClInclude Include="include\graphics\renderer.h" />
     <ClInclude Include="include\graphics\shader.h" />
     <ClInclude Include="include\graphics\instanceRenderer.h" />
+    <ClInclude Include="include\graphics\texture.h" />
     <ClInclude Include="include\graphics\triangle.h" />
     <ClInclude Include="include\graphics\window.h" />
     <ClInclude Include="include\lyz.h" />
@@ -185,7 +193,29 @@
     <ClInclude Include="include\math\vec4.h" />
     <ClInclude Include="include\utils\debug.h" />
     <ClInclude Include="include\utils\file.h" />
+    <ClInclude Include="include\utils\processing.h" />
     <ClInclude Include="include\utils\utils.h" />
+    <ClInclude Include="include\vendor\stb\stb.h" />
+    <ClInclude Include="include\vendor\stb\stb_connected_components.h" />
+    <ClInclude Include="include\vendor\stb\stb_c_lexer.h" />
+    <ClInclude Include="include\vendor\stb\stb_divide.h" />
+    <ClInclude Include="include\vendor\stb\stb_ds.h" />
+    <ClInclude Include="include\vendor\stb\stb_dxt.h" />
+    <ClInclude Include="include\vendor\stb\stb_easy_font.h" />
+    <ClInclude Include="include\vendor\stb\stb_herringbone_wang_tile.h" />
+    <ClInclude Include="include\vendor\stb\stb_image.h" />
+    <ClInclude Include="include\vendor\stb\stb_image_resize.h" />
+    <ClInclude Include="include\vendor\stb\stb_image_write.h" />
+    <ClInclude Include="include\vendor\stb\stb_include.h" />
+    <ClInclude Include="include\vendor\stb\stb_leakcheck.h" />
+    <ClInclude Include="include\vendor\stb\stb_perlin.h" />
+    <ClInclude Include="include\vendor\stb\stb_rect_pack.h" />
+    <ClInclude Include="include\vendor\stb\stb_sprintf.h" />
+    <ClInclude Include="include\vendor\stb\stb_textedit.h" />
+    <ClInclude Include="include\vendor\stb\stb_tilemap_editor.h" />
+    <ClInclude Include="include\vendor\stb\stb_truetype.h" />
+    <ClInclude Include="include\vendor\stb\stb_voxel_render.h" />
+    <ClInclude Include="include\vendor\stb\stretchy_buffer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\shaders\fragment.glsl" />
@@ -193,6 +223,11 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="src\shaders\shader01.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="src\example.bmp" />
+    <Image Include="src\example2.bmp" />
+    <Image Include="src\example3.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

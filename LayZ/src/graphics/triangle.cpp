@@ -27,7 +27,6 @@ namespace lyz { namespace graphics {
 		m_coords.push_back(coord2_t(x, y + m));
 		m_coords.push_back(coord2_t(x + baselength / 2.0, y - n));
 		m_coords.push_back(coord2_t(x - baselength / 2.0, y - n));
-
 	}
 	
 	Triangle::Triangle(const coord2_t & center, float baselength, float sidelength):

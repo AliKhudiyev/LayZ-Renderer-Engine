@@ -10,7 +10,9 @@
 
 #define LYZ_VERTEX_COORD_ELEMENTS		3
 #define LYZ_VERTEX_COLOR_ELEMENTS		4
-#define LYZ_VERTEXDATA_SIZE				(sizeof(coord_t) + sizeof(color_t))
+#define LYZ_VERTEX_TEXTURE_ELEMENTS		2
+#define LYZ_VERTEX_SLOT_ELEMENTS		1
+#define LYZ_VERTEXDATA_SIZE				(sizeof(coord_t) + sizeof(color_t) + sizeof(texture_t) + sizeof(slot_t))
 
 // FACES are triangles
 #define LYZ_RENDERER_MAX_FACES			2000000
@@ -29,6 +31,8 @@ namespace lyz { namespace graphics {
 	struct VertexData {
 		coord_t coord;
 		color_t color;
+		texture_t texCoord;
+		slot_t texSlot;
 	};
 
 	class Renderer {
@@ -48,6 +52,8 @@ namespace lyz { namespace graphics {
 	protected:
 		static Renderer* renderer;
 		static Shader* shader;
+
+		std::vector<unsigned> m_texIDs;
 
 	protected:
 		Renderer();

@@ -36,6 +36,9 @@ int main() {
 	InstanceRenderer* instanceRenderer = InstanceRenderer::getRenderer();
 	//PixelRenderer* pixelRenderer = PixelRenderer::getRenderer(WIDTH, HEIGHT);
 
+	Texture* texture1 = new Texture("src/example.bmp");
+	Texture* texture2 = new Texture("src/example2.bmp");
+
 	vector<coord2_t> coords{
 		LYZ_COORD2(-0.5, 0.5),
 		LYZ_COORD2(0.5, 0.5),
@@ -110,13 +113,27 @@ int main() {
 		//instanceRenderer->store(triangle);
 		//instanceRenderer->store(triangle2);
 		//instanceRenderer->draw();
-
+		
 		//pixelRenderer->setPixelAt(0, 0, LYZ_COLOR3(1.0, 1.0, 1.0));
 		//pixelRenderer->draw();
 
 		auto tri = new Triangle(0.0, 0.0, 0.5, 1.0);
 		tri->setColor(LYZ_COLOR3(0.0, 1.0, 1.0));
+		tri->setTexture(texture1);
+		auto rct = new Rectangle(0.0, 0.0, 1.0, 1.0);
+		rct->setTexture(texture1);
+		auto rct2 = new Rectangle(-1.0, 0.0, 0.5, 0.8);
+		rct2->setTexture(texture2);
 		renderer->store(tri);
+		renderer->store(rct);
+		renderer->store(rct2);
+
+		/*LYZ_CALL(glActiveTexture(GL_TEXTURE0 + 0));
+		LYZ_CALL(glBindTexture(GL_TEXTURE_2D, texture1->getID()));
+
+		LYZ_CALL(glActiveTexture(GL_TEXTURE1));
+		LYZ_CALL(glBindTexture(GL_TEXTURE_2D, texture2->getID()));*/
+
 		renderer->draw();
 
 		win->onUpdate();

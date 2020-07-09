@@ -52,10 +52,30 @@ namespace lyz { namespace graphics {
 		
 		const auto& coords = renderable->getCoords();
 		const auto& color = renderable->getColor();
+		const auto& texCoords = renderable->getTextureCoords();
+		const auto& texID = renderable->getTextureID();
 
-		for (const auto coord : coords) {
-			m_vertexData->coord = coord;
+		int texSlot = -1;
+		auto index = std::find(m_texIDs.cbegin(), m_texIDs.cend(), texID);
+		if (texID != -1 && index != m_texIDs.cend()) {
+			texSlot = index - m_texIDs.cbegin();
+		}
+		else if (texID != -1) {
+			texSlot = m_texIDs.size();
+			m_texIDs.push_back(texID);
+
+			LYZ_CALL(glActiveTexture(GL_TEXTURE0 + texSlot));
+			LYZ_CALL(glBindTexture(GL_TEXTURE_2D, texID));
+		}
+
+		for (size_t i = 0; i < coords.size(); ++i) {
+			m_vertexData->coord = coords[i];
 			m_vertexData->color = color;
+			m_vertexData->texCoord = coord2_t(0.0, 0.0);
+			if (texCoords.size()) {
+				m_vertexData->texCoord = texCoords[i];
+			}
+			m_vertexData->texSlot = static_cast<slot_t>(texSlot);
 			++m_vertexData;
 		}
 		
@@ -87,6 +107,7 @@ namespace lyz { namespace graphics {
 		
 		m_vertexCount = 0;
 		m_indexCount = 0;
+		m_texIDs.clear();
 	}
 
 	void Renderer::clear()
@@ -114,8 +135,20 @@ namespace lyz { namespace graphics {
 		m_vertexBuffer->setData(nullptr, LYZ_RENDERER_MAX_VERTICES_SIZE);
 		m_vertexBuffer->setLayout({
 			LYZ_VERTEX_COORD_ELEMENTS,
-			LYZ_VERTEX_COLOR_ELEMENTS
+			LYZ_VERTEX_COLOR_ELEMENTS,
+			LYZ_VERTEX_TEXTURE_ELEMENTS,
+			LYZ_VERTEX_SLOT_ELEMENTS
 		});
+
+		int slots[32];
+		for (int i = 0; i < 32; ++i) {
+			slots[i] = i;
+		}
+		;
+		Renderer::shader->enable();
+		//Renderer::shader->setUniform("textures", slots, 32);
+		LYZ_CALL(auto location = glGetUniformLocation(Renderer::shader->m_ID, "textures"));
+		LYZ_CALL(glUniform1iv(location, 32, slots));
 	}
 
 } }
