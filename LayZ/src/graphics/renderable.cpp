@@ -77,4 +77,9 @@ namespace lyz { namespace graphics {
 		m_texCoords = utils::tell_texCoords(m_coords);
 	}
 
+	void Renderable::unsetTexture()
+	{
+		setTexture(LYZ_NO_TEXTURE);
+	}
+
 } }

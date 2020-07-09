@@ -2,6 +2,8 @@
 
 #include "utils/utils.h"
 
+#define LYZ_NO_TEXTURE nullptr
+
 namespace lyz { namespace graphics {
 
 	class Texture {

@@ -128,12 +128,6 @@ int main() {
 		renderer->store(rct);
 		renderer->store(rct2);
 
-		/*LYZ_CALL(glActiveTexture(GL_TEXTURE0 + 0));
-		LYZ_CALL(glBindTexture(GL_TEXTURE_2D, texture1->getID()));
-
-		LYZ_CALL(glActiveTexture(GL_TEXTURE1));
-		LYZ_CALL(glBindTexture(GL_TEXTURE_2D, texture2->getID()));*/
-
 		renderer->draw();
 
 		win->onUpdate();
