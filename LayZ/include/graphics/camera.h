@@ -3,6 +3,12 @@
 #include "math/lyzm.h"
 #include "utils/utils.h"
 
+#include "graphics/renderer.h"
+#include "graphics/instanceRenderer.h"
+#include "graphics/pixelRenderer.h"
+
+#define LYZ_NO_RENDERER nullptr
+
 namespace lyz { namespace graphics {
 
 	class Camera {
@@ -12,21 +18,33 @@ namespace lyz { namespace graphics {
 			m_target = math::vec3(0.0, 0.0, 0.0), 
 			m_up = math::vec3(0.0, 1.0, 0.0)
 		;
-		math::vec3 m_space[2];
+
+		math::vec3 m_space[2] = {
+			{ -1.0, 1.0, 1.0 },
+			{ 1.0, -1.0, -1.0 }
+		};
 		// m_space[0] : left, top, near
 		// m_space[1] : right, bottom, far
 
-		float m_velocity = 1.0f, m_accelaration = 0.0f, m_deltatime = 1.0;
-
+		float 
+			m_velocity = 1.0f, 
+			m_accelaration = 0.0f, 
+			m_deltatime = 1.0
+		;
+		
 		static Camera* camera;
+		Renderer* m_renderer = nullptr;
 
 	protected:
-		Camera(float left, float right, float top, float bottom, float near, float far);
+		Camera(Renderer* renderer);
 
 	public:
-		static Camera* getCamera(float left = -1.0f, float right = 1.0f, float top = 1.0f, float bottom = -1.0f, float near = 1.0f, float far = -1.0f);
+		static Camera* getCamera(Renderer* renderer);
+		static Camera* getCamera(RendererType type);
 		~Camera();
 
+		void setRenderer(Renderer* renderer);
+		void setViewSpace(float left, float right, float top, float bottom, float near, float far);
 		void setVelocity(float velocity);
 		void setAccelration(float accelaration);
 		void setDeltaTime(float deltatime);

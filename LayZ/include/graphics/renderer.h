@@ -28,6 +28,13 @@ namespace lyz { namespace graphics {
 	
 	using renderer_status_t = bool;
 
+	enum RendererType {
+		Renderer_ = 0,
+		Batch_Renderer = 0,
+		Instance_Renderer,
+		Pixel_Renderer
+	};
+
 	struct VertexData {
 		coord_t coord;
 		color_t color;
@@ -49,6 +56,8 @@ namespace lyz { namespace graphics {
 		unsigned m_vertexCount = 0;
 		unsigned m_indexCount = 0;
 
+		std::vector<math::mat4> m_transformations;
+
 	protected:
 		static Renderer* renderer;
 		static Shader* shader;
@@ -65,6 +74,9 @@ namespace lyz { namespace graphics {
 
 		virtual void loadShader(const char* vertexpath, const char* fragmentpath);
 		virtual void loadShader(const char* shaderpath, ShaderType type);
+		virtual void addTransformation(const math::mat4& transformation);
+		virtual void setTransformation(const math::mat4& transformation);
+		virtual math::mat4 popTransformation();
 		virtual void store(const Renderable* renderable);
 		virtual void draw();
 		virtual void clear();

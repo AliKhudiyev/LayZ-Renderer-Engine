@@ -29,12 +29,14 @@ namespace lyz { namespace math {
 		static mat4 rotate(float angle, const vec3& begin, const vec3& end);
 		static mat4 ortho(float left, float right, float bottom, float top, float near, float far);
 		static mat4 perspective(float fov, float aspect_ratio, float near, float far);
+		static mat4 transpose(const mat4& mat);
 
 		const mat4 add(const mat4& mat) const;
 		const mat4 subtract(const mat4& mat) const;
 		const mat4 mat_mult(const mat4& mat) const;
 		const mat4 mat_mult(float val) const;
 		const mat4 mult(const mat4& mat) const;
+		const vec4 mult(const vec4& vec) const;
 
 		vec4 operator[](unsigned int i) const;
 		mat4& operator=(const mat4& mat);

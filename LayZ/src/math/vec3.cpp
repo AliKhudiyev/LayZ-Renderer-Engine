@@ -49,30 +49,38 @@ namespace lyz { namespace math {
 
 	vec3 vec3::cross(const vec3& vec) const
 	{
-		return vec3(data[1] * vec.data[2] - data[2] * vec.data[1],
+		return vec3(
+			data[1] * vec.data[2] - data[2] * vec.data[1],
 			data[2] * vec.data[0] - data[0] * vec.data[2],
-			data[0] * vec.data[1] - data[1] * vec.data[0]);
+			data[0] * vec.data[1] - data[1] * vec.data[0]
+		);
 	}
 
 	vec3 vec3::add(const vec3& vec) const
 	{
-		return vec3(data[0] + vec.data[0],
+		return vec3(
+			data[0] + vec.data[0],
 			data[1] + vec.data[1],
-			data[2] + vec.data[2]);
+			data[2] + vec.data[2]
+		);
 	}
 
 	vec3 vec3::subtract(const vec3& vec) const
 	{
-		return vec3(data[0] - vec.data[0],
+		return vec3(
+			data[0] - vec.data[0],
 			data[1] - vec.data[1],
-			data[2] - vec.data[2]);
+			data[2] - vec.data[2]
+		);
 	}
 
 	vec3 vec3::mult(const vec3& vec) const
 	{
-		return vec3(data[0] * vec.data[0],
+		return vec3(
+			data[0] * vec.data[0],
 			data[1] * vec.data[1],
-			data[2] * vec.data[2]);
+			data[2] * vec.data[2]
+		);
 	}
 
 	vec3 vec3::mult(float val) const

@@ -12,6 +12,7 @@ namespace lyz { namespace graphics {
 
 		m_indices(new unsigned[LYZ_RENDERER_MAX_INDICES])
 	{
+		m_transformations.push_back(math::mat4::identity());
 		Renderer::shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
 		init();
 	}
@@ -44,6 +45,28 @@ namespace lyz { namespace graphics {
 	void Renderer::loadShader(const char * shaderpath, ShaderType type)
 	{
 		Renderer::shader->load(shaderpath, type);
+	}
+
+	void Renderer::addTransformation(const math::mat4 & transformation)
+	{
+		auto last = m_transformations.back();
+		m_transformations.push_back(last * transformation);
+	}
+
+	void Renderer::setTransformation(const math::mat4 & transformation)
+	{
+		m_transformations.push_back(transformation);
+	}
+
+	math::mat4 Renderer::popTransformation()
+	{
+		if (m_transformations.size() == 1) {
+			std::cout << "WARNING: Trying to pop identity transformation!\n";
+			return math::mat4();
+		}
+		auto last = m_transformations.back();
+		m_transformations.pop_back();
+		return last;
 	}
 
 	void Renderer::store(const Renderable* renderable)
@@ -98,6 +121,7 @@ namespace lyz { namespace graphics {
 		m_vertexArray->enable();
 		m_indexBuffer->enable();
 		Renderer::shader->enable();
+		Renderer::shader->setUniform("model", m_transformations.back());
 
 		LYZ_CALL(glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, nullptr));
 

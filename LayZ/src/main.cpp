@@ -27,8 +27,6 @@ int main() {
 
 	//glfwSwapInterval(0);
 
-	//Shader* shd = new Shader("src/shaders/shader01.glsl");
-
 	//Shader* shader = new Shader("src/shaders/vertex.glsl", "src/shaders/fragment.glsl");
 	//shader->enable();
 
@@ -38,6 +36,15 @@ int main() {
 
 	Texture* texture1 = new Texture("src/example.bmp");
 	Texture* texture2 = new Texture("src/example2.bmp");
+
+	Camera* camera = Camera::getCamera(renderer);
+	camera->lookAt(
+		{ 0.0, 0.0, 1.0 }, 
+		{ 0.0, 0.0, 0.0 }, 
+		{ 0.0, 1.0, 0.0 }
+	);
+
+	EventData eventData;
 
 	vector<coord2_t> coords{
 		LYZ_COORD2(-0.5, 0.5),
@@ -91,6 +98,9 @@ int main() {
 	//pixelRenderer->setPixelWidth(40);
 	//pixelRenderer->setPixelHeight(40);
 
+	coord_t cameraPosition{ 0.0, 0.0, 1.0 };
+	coord_t cameraTarget{ 0.0, 0.0, 0.0 };
+
 	while (win->isRunning())
 	{
 		renderer->clear();
@@ -131,6 +141,39 @@ int main() {
 		renderer->draw();
 
 		win->onUpdate();
+		eventData = win->getEventData();
+
+		if (eventData.key == GLFW_KEY_A && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraPosition.data[0] -= 0.1;
+		}
+		else if (eventData.key == GLFW_KEY_D && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraPosition.data[0] += 0.1;
+		}
+		else if (eventData.key == GLFW_KEY_W && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraPosition.data[2] -= 0.1;
+		}
+		else if (eventData.key == GLFW_KEY_S && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraPosition.data[2] += 0.1;
+		}
+	
+		if (eventData.key == GLFW_KEY_UP && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraTarget.data[1] -= 0.1;
+		}
+		else if (eventData.key == GLFW_KEY_DOWN && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraTarget.data[1] += 0.1;
+		}
+		else if (eventData.key == GLFW_KEY_LEFT && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraTarget.data[0] += 0.1;
+		}
+		else if (eventData.key == GLFW_KEY_RIGHT && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraTarget.data[0] -= 0.1;
+		}
+
+		camera->lookAt(
+			cameraPosition,
+			cameraTarget,
+			{ 0.0, 1.0, 0.0 }
+		);
 	}
 
 	return 0;

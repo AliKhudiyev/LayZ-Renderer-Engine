@@ -110,6 +110,16 @@ namespace lyz { namespace math {
 		return mat4();
 	}
 
+	mat4 mat4::transpose(const mat4& mat)
+	{
+		return mat4(
+			vec4(mat.vecs[0].data[0], mat.vecs[1].data[0], mat.vecs[2].data[0], mat.vecs[3].data[0]),
+			vec4(mat.vecs[0].data[1], mat.vecs[1].data[1], mat.vecs[2].data[1], mat.vecs[3].data[1]),
+			vec4(mat.vecs[0].data[2], mat.vecs[1].data[2], mat.vecs[2].data[2], mat.vecs[3].data[2]),
+			vec4(mat.vecs[0].data[3], mat.vecs[1].data[3], mat.vecs[2].data[3], mat.vecs[3].data[3])
+		);
+	}
+
 	const mat4 mat4::add(const mat4& mat) const
 	{
 		return mat4(vecs[0] + vecs[0],
@@ -152,6 +162,16 @@ namespace lyz { namespace math {
 			vecs[1].mult(mat[1]),
 			vecs[2].mult(mat[2]),
 			vecs[3].mult(mat[3]));
+	}
+
+	const vec4 mat4::mult(const vec4 & vec) const
+	{
+		return vec4(
+			vecs[0].dot(vec),
+			vecs[1].dot(vec),
+			vecs[2].dot(vec),
+			vecs[3].dot(vec)
+		);
 	}
 
 	vec4 mat4::operator[](unsigned int i) const
