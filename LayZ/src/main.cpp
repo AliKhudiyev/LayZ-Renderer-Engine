@@ -4,14 +4,6 @@
 #include "graphics/graphics.h"
 #include "utils/utils.h"
 
-#include "graphics/renderable.h"
-#include "graphics/renderer.h"
-#include "graphics/instanceRenderer.h"
-#include "graphics/pixelRenderer.h"
-
-#include "graphics/triangle.h"
-#include "graphics/rectangle.h"
-
 using namespace std;
 
 using namespace lyz;
@@ -45,12 +37,8 @@ int main() {
 	Texture* texture1 = new Texture("src/example.bmp");
 	Texture* texture2 = new Texture("src/example2.bmp");
 
-	Camera* camera = Camera::getCamera(renderer);
-	/*camera->lookAt(
-		{ 0.0, 0.0, 1.0 }, 
-		{ 0.0, 0.0, 0.0 }, 
-		{ 0.0, 1.0, 0.0 }
-	);*/
+	OrthographicCamera* ocamera = OrthographicCamera::getCamera();
+	PerspectiveCamera* pcamera = PerspectiveCamera::getCamera();
 
 	EventData eventData;
 
@@ -137,12 +125,12 @@ int main() {
 		//pixelRenderer->setPixelAt(0, 0, LYZ_COLOR3(1.0, 1.0, 1.0));
 		//pixelRenderer->draw();
 
-		auto tri = new Triangle(0.0, 0.0, 0.5, 1.0);
-		tri->setColor(LYZ_COLOR3(0.0, 1.0, 1.0));
+		auto tri = new Triangle(0.0f, 0.0f, 0.5f, 1.0f);
+		tri->setColor(LYZ_COLOR3(0.0f, 1.0f, 1.0f));
 		tri->setTexture(texture1);
-		auto rct = new Rectangle(0.0, 0.0, 1.0, 1.0);
+		auto rct = new Rectangle(0.0f, 0.0f, 1.0f, 1.0f);
 		rct->setTexture(texture1);
-		auto rct2 = new Rectangle(-1.0, 0.0, 0.5, 0.8);
+		auto rct2 = new Rectangle(-1.0f, 0.0f, 0.5f, 0.8f);
 		rct2->setTexture(texture2);
 		renderer->store(tri);
 		renderer->store(rct);
@@ -154,56 +142,57 @@ int main() {
 		eventData = win->getEventData();
 
 		if (eventData.key == GLFW_KEY_A && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[0] -= 0.01;
+			cameraPosition.data[0] -= 0.01f;
 			cameraTarget = cameraPosition + cameraDirection;
 		}
 		if (eventData.key == GLFW_KEY_D && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[0] += 0.01;
+			cameraPosition.data[0] += 0.01f;
 		}
 		if (eventData.key == GLFW_KEY_W && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[2] -= 0.01;
+			cameraPosition.data[2] -= 0.01f;
 		}
 		if (eventData.key == GLFW_KEY_S && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[2] += 0.01;
+			cameraPosition.data[2] += 0.01f;
 		}
 		if (eventData.key == GLFW_KEY_C && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[1] -= 0.01;
+			cameraPosition.data[1] -= 0.01f;
 		}
 		if (eventData.key == GLFW_KEY_LEFT_CONTROL && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[1] += 0.01;
+			cameraPosition.data[1] += 0.01f;
 		}
 
 		if (eventData.key == GLFW_KEY_UP && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
 			cout << "> cam direction: " << cameraDirection << "\n";
-			cameraDirection = tell_yaw(cameraDirection, 1.0, camera->getRight());
-			cout << camera->getRight() << '\n';
+			cameraDirection = tell_yaw(cameraDirection, 1.0, ocamera->getRight());
+			cout << ocamera->getRight() << '\n';
 			cout << "< cam direction: " << cameraDirection << "\n\n";
 		}
 		else if (eventData.key == GLFW_KEY_DOWN && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
 			cout << "> cam direction: " << cameraDirection << "\n";
-			cameraDirection = tell_yaw(cameraDirection, -1.0, camera->getRight());
-			cout << camera->getRight() << '\n';
+			cameraDirection = tell_yaw(cameraDirection, -1.0, ocamera->getRight());
+			cout << ocamera->getRight() << '\n';
 			cout << "cam direction: " << cameraDirection << "\n\n";
 		}
 		else if (eventData.key == GLFW_KEY_LEFT && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
 			cout << "> cam direction: " << cameraDirection << "\n";
-			cameraDirection = tell_yaw(cameraDirection, 1.0, camera->getUp());
-			cout << camera->getRight() << '\n';
+			cameraDirection = tell_yaw(cameraDirection, 1.0, ocamera->getUp());
+			cout << ocamera->getRight() << '\n';
 			cout << "cam direction: " << cameraDirection << "\n\n";
 		}
 		else if (eventData.key == GLFW_KEY_RIGHT && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
 			cout << "> cam direction: " << cameraDirection << "\n";
-			cameraDirection = tell_yaw(cameraDirection, -1.0, camera->getUp());
-			cout << camera->getRight() << '\n';
+			cameraDirection = tell_yaw(cameraDirection, -1.0, ocamera->getUp());
+			cout << ocamera->getRight() << '\n';
 			cout << "cam direction: " << cameraDirection << "\n\n";
 		}
 
 		cameraTarget = cameraPosition + cameraDirection;
 
-		camera->lookAt(
+		ocamera->lookAt(
 			cameraPosition,
 			cameraTarget,
-			{ 0.0, 1.0, 0.0 }
+			{ 0.0, 1.0, 0.0 },
+			0.25f
 		);
 	}
 

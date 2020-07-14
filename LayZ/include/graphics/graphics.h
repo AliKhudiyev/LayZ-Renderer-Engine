@@ -6,6 +6,8 @@
 #include "window.h"
 #include "shader.h"
 #include "camera.h"
+#include "orthographicCamera.h"
+#include "perspectiveCamera.h"
 #include "renderable.h"
 #include "triangle.h"
 #include "rectangle.h"
