@@ -29,4 +29,20 @@ namespace lyz { namespace math {
 		return vec4(vec.data[0] / length, vec.data[1] / length, vec.data[2] / length, vec.data[3] / length);
 	}
 
+	vec2 rotate(float x, float y, const vec2 & axis, float angle)
+	{
+		return vec2();
+	}
+
+	vec3 rotate(float x, float y, float z, const vec3 & axis, float angle)
+	{
+		vec4 result = (mat4::rotate(angle, axis)).mult(vec4(x, y, z, 1.0));
+		return result.xyz();
+	}
+
+	vec3 rotate(const vec3 & vec, const vec3 & axis, float angle)
+	{
+		return rotate(vec.data[0], vec.data[1], vec.data[2], axis, angle);
+	}
+
 } }

@@ -11,6 +11,14 @@
 
 namespace lyz { namespace graphics {
 
+	enum CameraType {
+		ORTHOGRAPHIC = 0,
+		PERSPECTIVE
+	};
+
+	class OrthographicCamera;
+	class PerspectiveCamera;
+
 	class Camera {
 	private:
 		math::vec3 
@@ -41,6 +49,8 @@ namespace lyz { namespace graphics {
 	public:
 		static Camera* getCamera(Renderer* renderer);
 		static Camera* getCamera(RendererType type);
+		static OrthographicCamera* getOrthographicCamera();
+		static PerspectiveCamera* getPerspectiveCamera();
 		~Camera();
 
 		void setRenderer(Renderer* renderer);
@@ -64,6 +74,8 @@ namespace lyz { namespace graphics {
 		inline const math::vec3& getPosition() const { return m_position; }
 		inline const math::vec3& getTarget() const { return m_target; }
 		inline const math::vec3& getUp() const { return m_up; }
+		inline const math::vec3 getDirection() const { return m_position - m_target; }
+		inline const math::vec3 getRight() const { return m_up.cross(getDirection()); }
 		//inline const float getAngle() const { return 0.0; }
 	};
 

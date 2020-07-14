@@ -96,6 +96,12 @@
     <ClCompile Include="src\math\lyzm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\graphics\orthographicCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\graphics\perspectiveCamera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\graphics\window.h">
@@ -249,6 +255,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\graphics\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\orthographicCamera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graphics\perspectiveCamera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

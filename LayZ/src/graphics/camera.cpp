@@ -136,7 +136,7 @@ namespace lyz { namespace graphics {
 			) * 
 			math::mat4::translate(-position.data[0], -position.data[1], -position.data[2]);
 		m_renderer->popTransformation();
-		m_renderer->setTransformation(math::mat4::transpose(transformation));
+		m_renderer->setTransformation(transformation);
 	}
 	
 	void Camera::lookAt(const math::vec3 & position, const math::vec3 & target, float angle)

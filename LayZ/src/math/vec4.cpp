@@ -76,7 +76,11 @@ namespace lyz { namespace math {
 
 	float vec4::dot(const vec4& vec) const
 	{
-		return	data[0] * vec.data[0] + data[1] * vec.data[2] + data[2] * vec.data[3];
+		return	
+			data[0] * vec.data[0] + 
+			data[1] * vec.data[1] + 
+			data[2] * vec.data[2] + 
+			data[3] * vec.data[3];
 	}
 
 	vec4 vec4::cross(const vec4& vec) const

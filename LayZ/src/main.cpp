@@ -21,6 +21,14 @@ using namespace utils;
 #define WIDTH 640
 #define HEIGHT 480
 
+math::vec3 tell_yaw(const math::vec3& vertex, float angle, const math::vec3& axis) {
+	return math::rotate(vertex, axis, angle);
+}
+
+math::vec3 tell_pitch(const math::vec3& vertex, float angle, const math::vec3& axis) {
+	return math::rotate(vertex, axis, angle) - vertex;
+}
+
 int main() {
 
 	Window* win = new Window("BIG KAMAL", WIDTH, HEIGHT);
@@ -38,11 +46,11 @@ int main() {
 	Texture* texture2 = new Texture("src/example2.bmp");
 
 	Camera* camera = Camera::getCamera(renderer);
-	camera->lookAt(
+	/*camera->lookAt(
 		{ 0.0, 0.0, 1.0 }, 
 		{ 0.0, 0.0, 0.0 }, 
 		{ 0.0, 1.0, 0.0 }
-	);
+	);*/
 
 	EventData eventData;
 
@@ -98,8 +106,10 @@ int main() {
 	//pixelRenderer->setPixelWidth(40);
 	//pixelRenderer->setPixelHeight(40);
 
-	coord_t cameraPosition{ 0.0, 0.0, 1.0 };
-	coord_t cameraTarget{ 0.0, 0.0, 0.0 };
+	coord_t cameraPosition{ 0.5, 0.0, 1.0 };
+	coord_t cameraDirection = { 0.0, 0.0, -1.0 };
+	coord_t cameraTarget = cameraPosition + cameraDirection;
+	float xang_up = 1.0, xang_down = 1.0, yang_up = 1.0, yang_down = 1.0;
 
 	while (win->isRunning())
 	{
@@ -144,30 +154,51 @@ int main() {
 		eventData = win->getEventData();
 
 		if (eventData.key == GLFW_KEY_A && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[0] -= 0.1;
+			cameraPosition.data[0] -= 0.01;
+			cameraTarget = cameraPosition + cameraDirection;
 		}
-		else if (eventData.key == GLFW_KEY_D && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[0] += 0.1;
+		if (eventData.key == GLFW_KEY_D && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraPosition.data[0] += 0.01;
 		}
-		else if (eventData.key == GLFW_KEY_W && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[2] -= 0.1;
+		if (eventData.key == GLFW_KEY_W && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraPosition.data[2] -= 0.01;
 		}
-		else if (eventData.key == GLFW_KEY_S && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[2] += 0.1;
+		if (eventData.key == GLFW_KEY_S && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraPosition.data[2] += 0.01;
 		}
-	
+		if (eventData.key == GLFW_KEY_C && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraPosition.data[1] -= 0.01;
+		}
+		if (eventData.key == GLFW_KEY_LEFT_CONTROL && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
+			cameraPosition.data[1] += 0.01;
+		}
+
 		if (eventData.key == GLFW_KEY_UP && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraTarget.data[1] -= 0.1;
+			cout << "> cam direction: " << cameraDirection << "\n";
+			cameraDirection = tell_yaw(cameraDirection, 1.0, camera->getRight());
+			cout << camera->getRight() << '\n';
+			cout << "< cam direction: " << cameraDirection << "\n\n";
 		}
 		else if (eventData.key == GLFW_KEY_DOWN && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraTarget.data[1] += 0.1;
+			cout << "> cam direction: " << cameraDirection << "\n";
+			cameraDirection = tell_yaw(cameraDirection, -1.0, camera->getRight());
+			cout << camera->getRight() << '\n';
+			cout << "cam direction: " << cameraDirection << "\n\n";
 		}
 		else if (eventData.key == GLFW_KEY_LEFT && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraTarget.data[0] += 0.1;
+			cout << "> cam direction: " << cameraDirection << "\n";
+			cameraDirection = tell_yaw(cameraDirection, 1.0, camera->getUp());
+			cout << camera->getRight() << '\n';
+			cout << "cam direction: " << cameraDirection << "\n\n";
 		}
 		else if (eventData.key == GLFW_KEY_RIGHT && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraTarget.data[0] -= 0.1;
+			cout << "> cam direction: " << cameraDirection << "\n";
+			cameraDirection = tell_yaw(cameraDirection, -1.0, camera->getUp());
+			cout << camera->getRight() << '\n';
+			cout << "cam direction: " << cameraDirection << "\n\n";
 		}
+
+		cameraTarget = cameraPosition + cameraDirection;
 
 		camera->lookAt(
 			cameraPosition,

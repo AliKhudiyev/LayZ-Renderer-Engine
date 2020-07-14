@@ -148,6 +148,8 @@
     <ClCompile Include="src\graphics\buffers\vertexBuffer.cpp" />
     <ClCompile Include="src\graphics\event.cpp" />
     <ClCompile Include="src\graphics\line.cpp" />
+    <ClCompile Include="src\graphics\orthographicCamera.cpp" />
+    <ClCompile Include="src\graphics\perspectiveCamera.cpp" />
     <ClCompile Include="src\graphics\pixelRenderer.cpp" />
     <ClCompile Include="src\graphics\point.cpp" />
     <ClCompile Include="src\graphics\rectangle.cpp" />
@@ -178,6 +180,8 @@
     <ClInclude Include="include\graphics\event.h" />
     <ClInclude Include="include\graphics\graphics.h" />
     <ClInclude Include="include\graphics\line.h" />
+    <ClInclude Include="include\graphics\orthographicCamera.h" />
+    <ClInclude Include="include\graphics\perspectiveCamera.h" />
     <ClInclude Include="include\graphics\pixelRenderer.h" />
     <ClInclude Include="include\graphics\point.h" />
     <ClInclude Include="include\graphics\rectangle.h" />

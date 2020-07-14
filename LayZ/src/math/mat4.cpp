@@ -73,7 +73,6 @@ namespace lyz { namespace math {
 
 	mat4 mat4::rotate(float angle, const vec3& axis)
 	{
-		// TODO: 
 		float rad = M_PI * angle / 180.0;
 		float len = sqrtf(powf(axis.data[0], 2) + powf(axis.data[1], 2) + powf(axis.data[2], 2));
 		const vec3 naxis(axis.data[0] / len, axis.data[1] / len, axis.data[2] / len);
@@ -87,7 +86,7 @@ namespace lyz { namespace math {
 
 	mat4 mat4::rotate(float angle, const vec3 & begin, const vec3 & end)
 	{
-		const vec3 axis(end.data[0] - begin.data[0], end.data[2] - begin.data[2], end.data[2] - begin.data[2]);
+		const vec3 axis = end - begin;
 		const mat4 rotation = mat4::rotate(angle, axis);
 		mat4 result = mat4::translate(begin.data[0], begin.data[1], begin.data[2]) * rotation;
 
@@ -104,7 +103,7 @@ namespace lyz { namespace math {
 		);
 	}
 
-	mat4 mat4::perspective(float fov, float aspect_ratio, float, float)
+	mat4 mat4::perspective(float fov, float aspect_ratio, float near, float far)
 	{
 		// TODO: 
 		return mat4();
