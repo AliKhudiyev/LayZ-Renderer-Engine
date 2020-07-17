@@ -10,7 +10,11 @@ set(PROJECT_DIR "${PROJECT_PARENT_DIR}/LayZ")
 set(CMAKE_SOURCE_DIR ${PROJECT_DIR}/src)
 set(EXECUTABLE_NAME "layz")
 
-include_directories(${PROJECT_DIR}/include ${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/include ${PROJECT_PARENT_DIR}/Libs/GLFW/glfw-3.3.2/include)
+include_directories(
+        ${PROJECT_DIR}/include
+        ${PROJECT_DIR}/include/vendor
+        ${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/include
+        ${PROJECT_PARENT_DIR}/Libs/GLFW/glfw-3.3.2/include)
 
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
