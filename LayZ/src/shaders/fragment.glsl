@@ -1,6 +1,6 @@
 #version 330 core
 
-uniform sampler2D textures[32];
+uniform sampler2D textures[16];
 
 in struct Data {
 	vec4 color;

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <filesystem>
 
 #include "graphics/graphics.h"
 #include "utils/utils.h"
@@ -22,6 +23,8 @@ using namespace utils;
 #define HEIGHT 480
 
 int main() {
+
+    cout<<"Current file path is "<<filesystem::current_path()<<endl;
 
 	Window* win = new Window("BIG KAMAL", WIDTH, HEIGHT);
 

@@ -9,8 +9,9 @@ namespace lyz { namespace graphics {
 	Window::Window(const char * title, unsigned width, unsigned height)
 	{
 		if (!init()) {
-			;
+            // glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		}
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 
 		m_window = glfwCreateWindow(width, height, title, nullptr, nullptr);
 		if (!m_window)
