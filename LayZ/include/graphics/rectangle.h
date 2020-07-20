@@ -11,6 +11,8 @@ namespace lyz { namespace graphics {
 		Rectangle(float x, float y, float width, float height);
 		Rectangle(const coord2_t& point, float width, float height);
 		~Rectangle();
+
+		void setDepth(float depth) override;
 	};
 
 } }

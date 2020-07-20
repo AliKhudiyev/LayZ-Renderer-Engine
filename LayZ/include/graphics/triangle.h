@@ -13,6 +13,8 @@ namespace lyz { namespace graphics {
 		Triangle(float x, float y, float length);
 		Triangle(const coord2_t& center, float length);
 		~Triangle();
+
+		void setDepth(float depth) override;
 	};
 
 } }

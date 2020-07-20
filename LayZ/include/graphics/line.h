@@ -16,6 +16,7 @@ namespace lyz { namespace graphics {
 		~Line();
 
 		void setThickness(float size);
+		void setDepth(float depth) override { /* TO DO */ }
 	};
 
 } }

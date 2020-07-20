@@ -24,6 +24,14 @@ namespace lyz { namespace graphics {
 			m_up = math::vec3(0.0f, 1.0f, 0.0f)
 		;
 
+		float 
+			m_left = -1.0f, m_right = 1.0f, 
+			m_top = 1.0f, m_bottom = -1.0f, 
+			m_near = 1.0f, m_far = 1.0f
+		;
+
+		math::mat4 m_model = math::mat4::identity();
+		math::mat4 m_projection = math::mat4::identity();
 		math::mat4 m_transformation;
 
 		float 
@@ -41,6 +49,7 @@ namespace lyz { namespace graphics {
 	public:
 		virtual ~Camera();
 
+		virtual void setViewSpace(float left, float right, float top, float bottom, float near, float far);
 		virtual void setRenderer(Renderer* renderer);
 		virtual void setVelocity(float velocity);
 		virtual void setAccelration(float accelaration);
@@ -53,8 +62,8 @@ namespace lyz { namespace graphics {
 		virtual void setUp(float x, float y, float z);
 		virtual void setUp(const math::vec3& up);
 		virtual void rotate(float angle);
-		virtual void lookAt(const math::vec3& position, const math::vec3& target, const math::vec3& up, float zoom = -1.0);
-		virtual void lookAt(const math::vec3& position, const math::vec3& target, float angle = 0.0, float zoom = -1.0);
+		virtual math::mat4 lookAt(const math::vec3& position, const math::vec3& target, const math::vec3& up, float zoom = -1.0);
+		virtual math::mat4 lookAt(const math::vec3& position, const math::vec3& target, float angle = 0.0, float zoom = -1.0);
 	
 		inline virtual float getVelocity() const { return m_velocity; }
 		inline virtual float getAccelaration() const { return m_accelaration; }

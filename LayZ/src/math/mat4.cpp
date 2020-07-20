@@ -103,6 +103,16 @@ namespace lyz { namespace math {
 		);
 	}
 
+	mat4 mat4::perspective(float left, float right, float bottom, float top, float near, float far)
+	{
+		return mat4(
+			vec4(2.0 * near / (right - left), 0.0, (right + left) / (right - left), 0.0),
+			vec4(0.0, 2.0 * near / (top - bottom), (top + bottom) / (top - bottom), 0.0),
+			vec4(0.0, 0.0, -(far + near) / (far - near), -2.0 * far * near / (far - near)),
+			vec4(0.0, 0.0, -1.0, 0.0)
+		);
+	}
+
 	mat4 mat4::perspective(float fov, float aspect_ratio, float near, float far)
 	{
 		// TODO: 

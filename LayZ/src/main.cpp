@@ -94,10 +94,12 @@ int main() {
 	//pixelRenderer->setPixelWidth(40);
 	//pixelRenderer->setPixelHeight(40);
 
-	coord_t cameraPosition{ 0.5, 0.0, 1.0 };
+	coord_t cameraPosition{ 0.5, 0.0, 0.0 };
 	coord_t cameraDirection = { 0.0, 0.0, -1.0 };
 	coord_t cameraTarget = cameraPosition + cameraDirection;
-	float xang_up = 1.0, xang_down = 1.0, yang_up = 1.0, yang_down = 1.0;
+
+	//ocamera->setViewSpace(-2.0f, 2.0f, 2.0f, -2.0f, 1.0f, -1.0f);
+	pcamera->setViewSpace(-1.0f, 1.0f, 1.0f, -1.0f, 0.1f, 100.0f);
 
 	while (win->isRunning())
 	{
@@ -130,14 +132,16 @@ int main() {
 		tri->setTexture(texture1);
 		auto rct = new Rectangle(0.0f, 0.0f, 1.0f, 1.0f);
 		rct->setTexture(texture1);
+		rct->setDepth(-0.2f);
 		auto rct2 = new Rectangle(-1.0f, 0.0f, 0.5f, 0.8f);
+		rct2->setDepth(-0.5f);
 		rct2->setTexture(texture2);
 		renderer->store(tri);
 		renderer->store(rct);
 		renderer->store(rct2);
 
 		renderer->draw();
-
+		
 		win->onUpdate();
 		eventData = win->getEventData();
 
@@ -162,37 +166,43 @@ int main() {
 		}
 
 		if (eventData.key == GLFW_KEY_UP && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cout << "> cam direction: " << cameraDirection << "\n";
+			//cout << "> cam direction: " << cameraDirection << "\n";
 			cameraDirection = tell_yaw(cameraDirection, 1.0, ocamera->getRight());
-			cout << ocamera->getRight() << '\n';
-			cout << "< cam direction: " << cameraDirection << "\n\n";
+			//cout << ocamera->getRight() << '\n';
+			//cout << "< cam direction: " << cameraDirection << "\n\n";
 		}
 		else if (eventData.key == GLFW_KEY_DOWN && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cout << "> cam direction: " << cameraDirection << "\n";
+			//cout << "> cam direction: " << cameraDirection << "\n";
 			cameraDirection = tell_yaw(cameraDirection, -1.0, ocamera->getRight());
-			cout << ocamera->getRight() << '\n';
-			cout << "cam direction: " << cameraDirection << "\n\n";
+			//cout << ocamera->getRight() << '\n';
+			//cout << "cam direction: " << cameraDirection << "\n\n";
 		}
 		else if (eventData.key == GLFW_KEY_LEFT && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cout << "> cam direction: " << cameraDirection << "\n";
+			//cout << "> cam direction: " << cameraDirection << "\n";
 			cameraDirection = tell_yaw(cameraDirection, 1.0, ocamera->getUp());
-			cout << ocamera->getRight() << '\n';
-			cout << "cam direction: " << cameraDirection << "\n\n";
+			//cout << ocamera->getRight() << '\n';
+			//cout << "cam direction: " << cameraDirection << "\n\n";
 		}
 		else if (eventData.key == GLFW_KEY_RIGHT && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cout << "> cam direction: " << cameraDirection << "\n";
+			//cout << "> cam direction: " << cameraDirection << "\n";
 			cameraDirection = tell_yaw(cameraDirection, -1.0, ocamera->getUp());
-			cout << ocamera->getRight() << '\n';
-			cout << "cam direction: " << cameraDirection << "\n\n";
+			//cout << ocamera->getRight() << '\n';
+			//cout << "cam direction: " << cameraDirection << "\n\n";
 		}
 
 		cameraTarget = cameraPosition + cameraDirection;
 
-		ocamera->lookAt(
+		/*ocamera->lookAt(
 			cameraPosition,
 			cameraTarget,
 			{ 0.0, 1.0, 0.0 },
 			0.25f
+		);*/
+
+		pcamera->lookAt(
+			cameraPosition,
+			cameraTarget,
+			{ 0.0, 1.0, 0.0 }
 		);
 	}
 

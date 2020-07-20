@@ -18,15 +18,15 @@ namespace lyz { namespace graphics {
 	{
 		// Isosceles triangle
 
-		float h = sqrtf(powf(sidelength, 2.0) - powf(baselength / 2.0, 2.0));
-		float sin_beta = sqrtf(1 - powf(baselength, 2.0) / powf(2 * sidelength, 2.0));
-		float m1 = sqrtf(powf(baselength, 2.0) / 2.0 + powf(sidelength / 2.0, 2.0));
-		float n = 0.5 * tanf(asinf(sin_beta * sidelength / (2.0 * m1))) * baselength;
+		float h = sqrtf(powf(sidelength, 2.0f) - powf(baselength / 2.0f, 2.0f));
+		float sin_beta = sqrtf(1.0f - powf(baselength, 2.0f) / powf(2.0f * sidelength, 2.0f));
+		float m1 = sqrtf(powf(baselength, 2.0f) / 2.0f + powf(sidelength / 2.0f, 2.0f));
+		float n = 0.5f * tanf(asinf(sin_beta * sidelength / (2.0f * m1))) * baselength;
 		float m = h - n;
 
 		m_coords.push_back(coord2_t(x, y + m));
-		m_coords.push_back(coord2_t(x + baselength / 2.0, y - n));
-		m_coords.push_back(coord2_t(x - baselength / 2.0, y - n));
+		m_coords.push_back(coord2_t(x + baselength / 2.0f, y - n));
+		m_coords.push_back(coord2_t(x - baselength / 2.0f, y - n));
 	}
 	
 	Triangle::Triangle(const coord2_t & center, float baselength, float sidelength):
@@ -38,9 +38,9 @@ namespace lyz { namespace graphics {
 	{
 		// Equilateral triangle
 
-		m_coords.push_back(coord2_t(x, y + length / sqrtf(3)));
-		m_coords.push_back(coord2_t(x + length / 2.0, y - length / sqrtf(12)));
-		m_coords.push_back(coord2_t(x - length / 2.0, y - length / sqrtf(12)));
+		m_coords.push_back(coord2_t(x, y + length / sqrtf(3.0f)));
+		m_coords.push_back(coord2_t(x + length / 2.0f, y - length / sqrtf(12.0f)));
+		m_coords.push_back(coord2_t(x - length / 2.0f, y - length / sqrtf(12.0f)));
 	}
 
 	Triangle::Triangle(const coord2_t & center, float length):
@@ -50,6 +50,13 @@ namespace lyz { namespace graphics {
 	
 	Triangle::~Triangle()
 	{
+	}
+
+	void Triangle::setDepth(float depth)
+	{
+		m_coords[0].data[2] = depth;
+		m_coords[1].data[2] = depth;
+		m_coords[2].data[2] = depth;
 	}
 
 } }

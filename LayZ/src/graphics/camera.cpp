@@ -11,6 +11,13 @@ namespace lyz { namespace graphics {
 	{
 	}
 	
+	void Camera::setViewSpace(float left, float right, float top, float bottom, float near, float far)
+	{
+		m_left = left; m_right = right;
+		m_top = top; m_bottom = bottom;
+		m_near = near; m_far = far;
+	}
+
 	void Camera::setRenderer(Renderer * renderer)
 	{
 		if (renderer) {
@@ -94,7 +101,7 @@ namespace lyz { namespace graphics {
 		// TO DO
 	}
 	
-	void Camera::lookAt(const math::vec3 & position, const math::vec3 & target, const math::vec3 & up, float zoom)
+	math::mat4 Camera::lookAt(const math::vec3 & position, const math::vec3 & target, const math::vec3 & up, float zoom)
 	{
 		m_position = position;
 		m_target = target;
@@ -111,7 +118,7 @@ namespace lyz { namespace graphics {
 		auto right = math::normalize(m_up.cross(direction));
 		m_up = math::normalize(direction.cross(right));
 
-		m_transformation =
+		m_model =
 			math::mat4(
 				math::vec4(right.data[0],		right.data[1],		right.data[2],		0.0),
 				math::vec4(m_up.data[0],		m_up.data[1],		m_up.data[2],		0.0),
@@ -122,13 +129,16 @@ namespace lyz { namespace graphics {
 			math::mat4::scale(m_zoom, m_zoom, m_zoom);
 		
 		m_renderer->popTransformation();
+		m_transformation = m_model * m_projection;
 		m_renderer->setTransformation(m_transformation);
+
+		return m_model;
 	}
 	
-	void Camera::lookAt(const math::vec3 & position, const math::vec3 & target, float angle, float zoom)
+	math::mat4 Camera::lookAt(const math::vec3 & position, const math::vec3 & target, float angle, float zoom)
 	{
 		auto up = math::mat4::rotate(angle, m_position).mult(math::vec4(m_up, 1.0));
-		lookAt(position, target, up.xyz(), zoom);
+		return lookAt(position, target, up.xyz(), zoom);
 	}
 
 } }

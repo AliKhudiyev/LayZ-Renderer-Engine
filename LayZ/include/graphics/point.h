@@ -19,6 +19,7 @@ namespace lyz { namespace graphics {
 
 		void setSize(float size);
 		void makeCircular(bool isCircular = LYZ_POINT_CIRCULAR);
+		void setDepth(float depth) override { /* TO DO */ }
 	};
 
 } }

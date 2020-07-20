@@ -54,6 +54,7 @@ namespace lyz { namespace graphics {
 		virtual void setColor(const color3_t& color);
 		virtual void setTexture(const Texture* texture);
 		virtual void unsetTexture();
+		virtual void setDepth(float depth) {};
 
 		inline const std::vector<coord_t>& getCoords() const { return m_coords; }
 		inline const math::vec4& getColor() const { return m_color; }

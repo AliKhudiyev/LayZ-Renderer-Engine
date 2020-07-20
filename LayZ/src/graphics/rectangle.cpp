@@ -34,4 +34,12 @@ namespace lyz { namespace graphics {
 	{
 	}
 
+	void Rectangle::setDepth(float depth)
+	{
+		m_coords[0].data[2] = depth;
+		m_coords[1].data[2] = depth;
+		m_coords[2].data[2] = depth;
+		m_coords[3].data[2] = depth;
+	}
+
 } }

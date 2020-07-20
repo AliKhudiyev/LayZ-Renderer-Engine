@@ -32,7 +32,11 @@ namespace lyz { namespace graphics {
 
 	void OrthographicCamera::updateCamera()
 	{
-		m_transformation = math::mat4::ortho(m_left, m_right, m_bottom, m_top, m_near, m_far);
+		m_renderer->popTransformation();
+		m_projection = math::mat4::ortho(m_left, m_right, m_bottom, m_top, m_near, m_far);
+		m_transformation = m_model * m_projection;
+		std::cout << m_transformation << "\n\n";
+		m_renderer->setTransformation(m_transformation);
 	}
 
 } }

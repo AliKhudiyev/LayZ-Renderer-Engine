@@ -6,8 +6,6 @@ namespace lyz { namespace graphics {
 
 	class OrthographicCamera : public Camera {
 	private:
-		float m_left, m_right, m_top, m_bottom, m_near, m_far;
-
 		static OrthographicCamera* camera;
 
 	private:
@@ -17,7 +15,7 @@ namespace lyz { namespace graphics {
 		static OrthographicCamera* getCamera();
 		~OrthographicCamera();
 
-		void setViewSpace(float left, float right, float top, float bottom, float near, float far);
+		void setViewSpace(float left, float right, float top, float bottom, float near, float far) override;
 	
 	private:
 		void updateCamera() override;

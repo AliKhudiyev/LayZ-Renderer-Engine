@@ -50,7 +50,7 @@ namespace lyz { namespace graphics {
 	void Renderer::addTransformation(const math::mat4 & transformation)
 	{
 		auto last = m_transformations.back();
-		m_transformations.push_back(last * transformation);
+		m_transformations.push_back(transformation * last);
 	}
 
 	void Renderer::setTransformation(const math::mat4 & transformation)

@@ -28,6 +28,7 @@ namespace lyz { namespace math {
 		static mat4 rotate(float angle, const vec3& axis);
 		static mat4 rotate(float angle, const vec3& begin, const vec3& end);
 		static mat4 ortho(float left, float right, float bottom, float top, float near, float far);
+		static mat4 perspective(float left, float right, float bottom, float top, float near, float far);
 		static mat4 perspective(float fov, float aspect_ratio, float near, float far);
 		static mat4 transpose(const mat4& mat);
 
