@@ -103,7 +103,7 @@ namespace lyz { namespace graphics {
 			m_vertexData->texSlot = static_cast<slot_t>(texSlot);
 			++m_vertexData;
 		}
-		unsigned indexCount = m_vertexCount + m_indexCountLine + m_indexCountPoint;
+
 		if (renderable->getType() == RenderableType::OTHER) {
 		
 			for (unsigned i = m_indexCount, j = m_vertexCount; i < m_indexCount + 3 * (coords.size() - 2); i += 3, ++j) {
@@ -112,24 +112,25 @@ namespace lyz { namespace graphics {
 				m_indices[i + 2] = j + 2;
 			}
 
-			m_vertexCount += coords.size();
 			m_indexCount += 3 * (coords.size() - 2);
 		}
 		else if (renderable->getType() == RenderableType::LINE) {
-			for (unsigned i = m_indexCountLine, j = indexCount; i < 2; i += 2) {
+			for (unsigned i = m_indexCountLine, j = m_vertexCount; i < m_indexCountLine + 2; i += 2) {
 				m_indicesLine[i + 0] = j + 0;
 				m_indicesLine[i + 1] = j + 1;
 			}
-
+			
 			m_indexCountLine += 2;
 		}
 		else { // renderable->getType() == RenderableType::POINT
-			for (unsigned i = m_indexCountPoint, j = indexCount; i < 1; ++i) {
-				m_indicesLine[i] = j;
+			for (unsigned i = m_indexCountPoint, j = m_vertexCount; i < m_indexCountPoint + 1; ++i) {
+				m_indicesPoint[i] = j;
 			}
 
 			++m_indexCountPoint;
 		}
+
+		m_vertexCount += coords.size();
 	}
 	
 	void Renderer::draw()

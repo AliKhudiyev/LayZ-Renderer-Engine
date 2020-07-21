@@ -141,15 +141,26 @@ int main() {
 		
 		auto line1 = new Line(0.0, 0.0, 1.0, 1.0);
 		line1->setColor(LYZ_COLOR3(1.0, 0.0, 1.0));
+
+		auto line2 = new Line(0.0, 0.0, -1.0, 1.0);
+		line2->setColor(LYZ_COLOR3(0.0, 1.0, 0.0));
 		
 		auto point1 = new Point(-0.1, 0.1);
 		point1->setColor(LYZ_COLOR3(1.0, 1.0, 1.0));
 
-		//renderer->store(tri);
-		//renderer->store(rct);
-		//renderer->store(rct2);
+		auto point2 = new Point(-0.1, 0.5);
+		point2->setColor(LYZ_COLOR3(1.0, 1.0, 1.0));
+
+		glPointSize(20.0);
+		glLineWidth(2.0);
+
+		renderer->store(tri);
 		renderer->store(line1);
+		renderer->store(line2);
 		renderer->store(point1);
+		renderer->store(rct);
+		renderer->store(point2);
+		renderer->store(rct2);
 
 		renderer->draw();
 		
