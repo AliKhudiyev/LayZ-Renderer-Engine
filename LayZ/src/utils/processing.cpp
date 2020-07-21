@@ -4,7 +4,7 @@
 
 namespace lyz { namespace utils {
 
-	std::vector<math::vec2> utils::tell_texCoords(const std::vector<math::vec2>& vertices)
+	std::vector<math::vec2> tell_texCoords(const std::vector<math::vec2>& vertices)
 	{
 		std::vector<math::vec2> texCoords;
 		std::vector<float> x_coords, y_coords;

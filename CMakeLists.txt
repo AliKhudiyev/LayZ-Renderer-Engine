@@ -10,12 +10,26 @@ set(PROJECT_DIR "${PROJECT_PARENT_DIR}/LayZ")
 set(CMAKE_SOURCE_DIR ${PROJECT_DIR}/src)
 set(EXECUTABLE_NAME "layz")
 
-include_directories(${PROJECT_DIR}/include ${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/include ${PROJECT_PARENT_DIR}/Libs/GLFW/glfw-3.3.2/include)
+include_directories(
+        ${PROJECT_DIR}/include
+        ${PROJECT_DIR}/include/vendor
+        ${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/include
+        ${PROJECT_PARENT_DIR}/Libs/GLFW/glfw-3.3.2/include
+)
 
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIR})
 
-if (UNIX)
+if (APPLE)
+    message("Apple settings")
+
+    find_package(glfw3 REQUIRED)
+    find_package(GLEW REQUIRED)
+
+    include_directories(/usr/local/include)
+    link_libraries(/usr/local/lib/libGLEW.a)
+
+elseif (UNIX)
     message("UNIX settings")
 
     find_package(glfw3 REQUIRED)
@@ -24,9 +38,8 @@ if (UNIX)
         include_directories(${GLEW_INCLUDE_DIRS})
         link_libraries(${GLEW_LIBRARIES})
     endif()
-endif()
 
-if (WIN32)
+elseif (WIN32)
     message("Windows settings")
     message("Respects to all windows developers, but this os sucks so bad!")
 
@@ -36,6 +49,9 @@ if (WIN32)
 
     include_directories(${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/include/GL)
     link_libraries(${PROJECT_PARENT_DIR}/Libs/GLEW/glew-2.1.0/lib/libglew32.a)
+
+else ()
+    message("Platform is not supported!")
 endif()
 
 file(GLOB SOURCES ${CMAKE_SOURCE_DIR}/*.cpp ${CMAKE_SOURCE_DIR}/*/*.cpp ${CMAKE_SOURCE_DIR}/*/*/*.cpp)

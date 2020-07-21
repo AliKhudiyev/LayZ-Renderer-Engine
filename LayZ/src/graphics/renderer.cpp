@@ -1,5 +1,7 @@
 #include "graphics/renderer.h"
 
+#include <algorithm>
+
 namespace lyz { namespace graphics {
 
 	Renderer* Renderer::renderer = nullptr;
@@ -82,6 +84,7 @@ namespace lyz { namespace graphics {
 
 		int texSlot = -1;
 		auto index = std::find(m_texIDs.cbegin(), m_texIDs.cend(), texID);
+
 		if (texID != -1 && index != m_texIDs.cend()) {
 			texSlot = index - m_texIDs.cbegin();
 		}

@@ -101,7 +101,7 @@ int main() {
 	//ocamera->setViewSpace(-2.0f, 2.0f, 2.0f, -2.0f, 1.0f, -1.0f);
 	//pcamera->setViewSpace(-1.0f, 1.0f, 1.0f, -1.0f, 0.1f, 100.0f);
 
-	while (win->isRunning())
+    while (win->isRunning())
 	{
 		renderer->clear();
 		

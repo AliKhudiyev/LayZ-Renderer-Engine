@@ -33,7 +33,7 @@ namespace lyz { namespace graphics {
 		std::vector<texture_t> m_texCoords;
 		color_t m_color;
 
-		const Texture* m_texture;
+		const Texture* m_texture = nullptr;
 
 		RenderableType m_type;
 
