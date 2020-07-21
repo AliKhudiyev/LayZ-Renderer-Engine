@@ -145,14 +145,15 @@ int main() {
 		auto line2 = new Line(0.0, 0.0, -1.0, 1.0);
 		line2->setColor(LYZ_COLOR3(0.0, 1.0, 0.0));
 		
-		auto point1 = new Point(-0.1, 0.1);
+		auto point1 = new Point(-0.1, 0.5);
 		point1->setColor(LYZ_COLOR3(1.0, 1.0, 1.0));
 
-		auto point2 = new Point(-0.1, 0.5);
-		point2->setColor(LYZ_COLOR3(1.0, 1.0, 1.0));
+		auto point2 = new Point(-0.1, 1.0);
+		point2->setColor(LYZ_COLOR3(0.0, 1.0, 1.0));
 
-		glPointSize(20.0);
-		glLineWidth(2.0);
+		//Point::makeCircular();
+		Point::setSize(10.0);
+		Line::setSize(5.0);
 
 		renderer->store(tri);
 		renderer->store(line1);

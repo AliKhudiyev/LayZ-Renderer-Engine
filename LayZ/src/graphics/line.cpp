@@ -2,12 +2,14 @@
 
 namespace lyz { namespace graphics {
 
-	Line::Line(float x1, float y1, float z1, float x2, float y2, float z2, float size):
-		m_size(1.0)
+	float Line::lineSize = 1.0f;
+
+	Line::Line(float x1, float y1, float z1, float x2, float y2, float z2, float size)
 	{
+		Line::lineSize = size;
+
 		m_coords.push_back(coord_t(x1, y1, z1));
 		m_coords.push_back(coord_t(x2, y2, z2));
-
 		m_type = RenderableType::LINE;
 	}
 	
@@ -32,7 +34,20 @@ namespace lyz { namespace graphics {
 	
 	void Line::setThickness(float size)
 	{
-		m_size = size;
+		Line::lineSize = size;
+
+		LYZ_CALL(glLineWidth(Line::lineSize));
+	}
+
+	void Line::setSize(float size)
+	{
+		setThickness(size);
+	}
+
+	void Line::setDepth(float depth)
+	{
+		m_coords[0].data[2] = depth;
+		m_coords[1].data[2] = depth;
 	}
 
 } }

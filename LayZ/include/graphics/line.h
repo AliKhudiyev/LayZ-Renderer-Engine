@@ -6,7 +6,7 @@ namespace lyz { namespace graphics {
 
 	class Line : public Renderable {
 	private:
-		float m_size;
+		static float lineSize;
 
 	public:
 		Line(float x1, float y1, float z1, float x2, float y2, float z2, float size = 1.0);
@@ -15,8 +15,12 @@ namespace lyz { namespace graphics {
 		Line(const coord2_t& v1, const coord2_t& v2, float size = 1.0);
 		~Line();
 
-		void setThickness(float size);
-		void setDepth(float depth) override { /* TO DO */ }
+		static void setThickness(float size);
+		static void setSize(float size);
+		void setDepth(float depth) override;
+
+		inline static float getThickness() { return Line::lineSize; }
+		inline static float getSize() { return Line::lineSize; }
 	};
 
 } }
