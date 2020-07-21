@@ -94,12 +94,12 @@ int main() {
 	//pixelRenderer->setPixelWidth(40);
 	//pixelRenderer->setPixelHeight(40);
 
-	coord_t cameraPosition{ 0.5, 0.0, 0.0 };
+	coord_t cameraPosition{ 0.0, 0.0, 0.0 };
 	coord_t cameraDirection = { 0.0, 0.0, -1.0 };
 	coord_t cameraTarget = cameraPosition + cameraDirection;
 
 	//ocamera->setViewSpace(-2.0f, 2.0f, 2.0f, -2.0f, 1.0f, -1.0f);
-	pcamera->setViewSpace(-1.0f, 1.0f, 1.0f, -1.0f, 0.1f, 100.0f);
+	//pcamera->setViewSpace(-1.0f, 1.0f, 1.0f, -1.0f, 0.1f, 100.0f);
 
 	while (win->isRunning())
 	{
@@ -130,15 +130,26 @@ int main() {
 		auto tri = new Triangle(0.0f, 0.0f, 0.5f, 1.0f);
 		tri->setColor(LYZ_COLOR3(0.0f, 1.0f, 1.0f));
 		tri->setTexture(texture1);
+
 		auto rct = new Rectangle(0.0f, 0.0f, 1.0f, 1.0f);
+		//rct->setDepth(-0.2f);
 		rct->setTexture(texture1);
-		rct->setDepth(-0.2f);
+		
 		auto rct2 = new Rectangle(-1.0f, 0.0f, 0.5f, 0.8f);
-		rct2->setDepth(-0.5f);
+		//rct2->setDepth(-0.5f);
 		rct2->setTexture(texture2);
-		renderer->store(tri);
-		renderer->store(rct);
-		renderer->store(rct2);
+		
+		auto line1 = new Line(0.0, 0.0, 1.0, 1.0);
+		line1->setColor(LYZ_COLOR3(1.0, 0.0, 1.0));
+		
+		auto point1 = new Point(-0.1, 0.1);
+		point1->setColor(LYZ_COLOR3(1.0, 1.0, 1.0));
+
+		//renderer->store(tri);
+		//renderer->store(rct);
+		//renderer->store(rct2);
+		renderer->store(line1);
+		renderer->store(point1);
 
 		renderer->draw();
 		
@@ -159,10 +170,10 @@ int main() {
 			cameraPosition.data[2] += 0.01f;
 		}
 		if (eventData.key == GLFW_KEY_C && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[1] -= 0.01f;
+			cameraPosition.data[1] += 0.01f;
 		}
 		if (eventData.key == GLFW_KEY_LEFT_CONTROL && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
-			cameraPosition.data[1] += 0.01f;
+			cameraPosition.data[1] -= 0.01f;
 		}
 
 		if (eventData.key == GLFW_KEY_UP && (eventData.action == GLFW_PRESS || eventData.action == GLFW_REPEAT)) {
@@ -192,18 +203,18 @@ int main() {
 
 		cameraTarget = cameraPosition + cameraDirection;
 
-		/*ocamera->lookAt(
+		ocamera->lookAt(
 			cameraPosition,
 			cameraTarget,
 			{ 0.0, 1.0, 0.0 },
-			0.25f
-		);*/
+			0.25f * 2.0f
+		);
 
-		pcamera->lookAt(
+		/*pcamera->lookAt(
 			cameraPosition,
 			cameraTarget,
 			{ 0.0, 1.0, 0.0 }
-		);
+		);*/
 	}
 
 	return 0;

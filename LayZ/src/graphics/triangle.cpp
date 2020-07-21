@@ -7,6 +7,8 @@ namespace lyz { namespace graphics {
 		m_coords.push_back(coord2_t(x1, y1));
 		m_coords.push_back(coord2_t(x2, y2));
 		m_coords.push_back(coord2_t(x3, y3));
+
+		m_type = RenderableType::OTHER;
 	}
 
 	Triangle::Triangle(const coord2_t & v1, const coord2_t & v2, const coord2_t & v3):
@@ -27,6 +29,8 @@ namespace lyz { namespace graphics {
 		m_coords.push_back(coord2_t(x, y + m));
 		m_coords.push_back(coord2_t(x + baselength / 2.0f, y - n));
 		m_coords.push_back(coord2_t(x - baselength / 2.0f, y - n));
+
+		m_type = RenderableType::OTHER;
 	}
 	
 	Triangle::Triangle(const coord2_t & center, float baselength, float sidelength):
@@ -41,6 +45,8 @@ namespace lyz { namespace graphics {
 		m_coords.push_back(coord2_t(x, y + length / sqrtf(3.0f)));
 		m_coords.push_back(coord2_t(x + length / 2.0f, y - length / sqrtf(12.0f)));
 		m_coords.push_back(coord2_t(x - length / 2.0f, y - length / sqrtf(12.0f)));
+
+		m_type = RenderableType::OTHER;
 	}
 
 	Triangle::Triangle(const coord2_t & center, float length):

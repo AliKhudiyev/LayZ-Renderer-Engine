@@ -3,8 +3,12 @@
 namespace lyz { namespace graphics {
 
 	Line::Line(float x1, float y1, float z1, float x2, float y2, float z2, float size):
-		m_size()
+		m_size(1.0)
 	{
+		m_coords.push_back(coord_t(x1, y1, z1));
+		m_coords.push_back(coord_t(x2, y2, z2));
+
+		m_type = RenderableType::LINE;
 	}
 	
 	Line::Line(const coord_t & v1, const coord_t & v2, float size):

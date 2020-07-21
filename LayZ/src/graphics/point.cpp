@@ -5,7 +5,9 @@ namespace lyz { namespace graphics {
 	Point::Point(float x, float y, float z, float size):
 		m_size(size)
 	{
-		;
+		m_coords.push_back(coord_t(x, y, z));
+
+		m_type = RenderableType::POINT;
 	}
 
 	Point::Point(const coord_t & position):

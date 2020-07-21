@@ -8,6 +8,16 @@ namespace lyz { namespace graphics {
 		m_coords(coords), m_texture(nullptr)
 	{
 		m_texCoords.resize(coords.size());
+
+		if (coords.size() == 1) {
+			m_type = RenderableType::POINT;
+		}
+		else if (coords.size() == 2) {
+			m_type = RenderableType::LINE;
+		}
+		else {
+			m_type = RenderableType::OTHER;
+		}
 	}
 	
 	Renderable::Renderable(const std::vector<coord2_t>& coords):
@@ -16,6 +26,16 @@ namespace lyz { namespace graphics {
 		for (const auto& coord : coords)
 			m_coords.push_back(coord_t(coord, 0.0));
 		m_texCoords = utils::tell_texCoords(coords);
+
+		if (coords.size() == 1) {
+			m_type = RenderableType::POINT;
+		}
+		else if (coords.size() == 2) {
+			m_type = RenderableType::LINE;
+		}
+		else {
+			m_type = RenderableType::OTHER;
+		}
 	}
 
 	Renderable::~Renderable()
@@ -26,6 +46,16 @@ namespace lyz { namespace graphics {
 	{
 		m_coords = coords;
 		m_texCoords.resize(coords.size());
+
+		if (coords.size() == 1) {
+			m_type = RenderableType::POINT;
+		}
+		else if (coords.size() == 2) {
+			m_type = RenderableType::LINE;
+		}
+		else {
+			m_type = RenderableType::OTHER;
+		}
 	}
 
 	void Renderable::setCoords(const std::vector<coord2_t>& coords)
@@ -34,7 +64,17 @@ namespace lyz { namespace graphics {
 		for (const auto& coord : coords) {
 			m_coords.push_back(coord);
 		}
-		m_texCoords.resize(coords.size());
+		m_texCoords = utils::tell_texCoords(coords);
+
+		if (coords.size() == 1) {
+			m_type = RenderableType::POINT;
+		}
+		else if (coords.size() == 2) {
+			m_type = RenderableType::LINE;
+		}
+		else {
+			m_type = RenderableType::OTHER;
+		}
 	}
 
 	void Renderable::setCoordAt(unsigned index, const coord_t & coord)

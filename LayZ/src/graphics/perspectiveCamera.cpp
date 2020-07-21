@@ -43,13 +43,13 @@ namespace lyz { namespace graphics {
 
 	void PerspectiveCamera::updateCamera()
 	{
-		std::cout << "Updating camera...\n";
+		//std::cout << "Updating camera...\n";
 
 		m_renderer->popTransformation();
 		m_projection = math::mat4::perspective(m_left, m_right, m_bottom, m_top, m_near, m_far);
 			// math::mat4::perspective(m_fov, m_aspectRatio, m_near, m_far);
 		m_transformation = m_model * m_projection;
-		std::cout << m_model << "\n\n" << m_projection << "\n\n" << m_transformation.mult(math::vec4(1.0, -1.0, 0.0, 1.0)) << "\n\n";
+		//std::cout << m_model << "\n\n" << m_projection << "\n\n" << m_transformation.mult(math::vec4(1.0, -1.0, 0.0, 1.0)) << "\n\n";
 		
 		m_renderer->setTransformation(m_transformation);
 	}

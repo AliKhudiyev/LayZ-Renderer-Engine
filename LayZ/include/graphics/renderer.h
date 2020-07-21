@@ -20,6 +20,9 @@
 #define LYZ_RENDERER_MAX_INDICES		3 * LYZ_RENDERER_MAX_FACES
 #define LYZ_RENDERER_MAX_VERTICES_SIZE	LYZ_VERTEXDATA_SIZE * LYZ_RENDERER_MAX_VERTICES
 
+#define LYZ_RENDERER_MAX_LINES			10000
+#define LYZ_RENDERER_MAX_POINTS			20000
+
 #define LYZ_RENDERER_MAX_SHADERS		6
 
 #define LYZ_DEFAULT_SHADER_PATH			"src/shaders/"
@@ -42,19 +45,27 @@ namespace lyz { namespace graphics {
 		slot_t texSlot;
 	};
 
+	struct VertexDataLine {
+		coord_t coord;
+	};
+
+	struct VertexDataPoint {
+		coord_t coord;
+	};
+
 	class Renderer {
 	private:
 		VertexArray* m_vertexArray;
-		VertexBuffer* m_vertexBuffer, m_vertexBuffer4Lines, m_vertexBuffer4Points;
-		IndexBuffer* m_indexBuffer;
+		VertexBuffer* m_vertexBuffer;
+		IndexBuffer* m_indexBuffer, *m_indexBufferLine, *m_indexBufferPoint;
 
 		VertexData* m_vertexData;
 
 		renderer_status_t m_rendererStatus = LYZ_RENDERER_STORE_STOP;
 
-		unsigned* m_indices = nullptr;
+		unsigned* m_indices = nullptr, *m_indicesLine = nullptr, *m_indicesPoint = nullptr;
 		unsigned m_vertexCount = 0;
-		unsigned m_indexCount = 0;
+		unsigned m_indexCount = 0, m_indexCountLine = 0, m_indexCountPoint = 0;
 
 		std::vector<math::mat4> m_transformations;
 

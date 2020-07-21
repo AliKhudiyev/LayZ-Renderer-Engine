@@ -35,8 +35,7 @@ namespace lyz { namespace graphics {
 
 		const Texture* m_texture;
 
-		std::vector<coord_t> m_lineCoords;
-		std::vector<coord_t> m_pointCoords;
+		RenderableType m_type;
 
 	protected:
 		Renderable() = default;
@@ -60,6 +59,7 @@ namespace lyz { namespace graphics {
 		inline const math::vec4& getColor() const { return m_color; }
 		inline const std::vector<texture_t>& getTextureCoords() const { return m_texCoords; }
 		inline unsigned getTextureID() const { return m_texture? m_texture->getID() : -1; }
+		inline RenderableType getType() const { return m_type; }
 	};
 
 } }

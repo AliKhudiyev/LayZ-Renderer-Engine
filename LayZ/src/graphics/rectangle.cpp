@@ -10,6 +10,8 @@ namespace lyz { namespace graphics {
 		m_coords.push_back(coord2_t(x2, y2));
 		m_coords.push_back(coord2_t(x3, y3));
 		m_coords.push_back(coord2_t(x4, y4));
+
+		m_type = RenderableType::OTHER;
 	}
 
 	Rectangle::Rectangle(const coord2_t & point1, const coord2_t & point2, const coord2_t & point3, const coord2_t & point4):
@@ -23,6 +25,8 @@ namespace lyz { namespace graphics {
 		m_coords.push_back(coord2_t(x + width,	y));
 		m_coords.push_back(coord2_t(x + width,	y - height));
 		m_coords.push_back(coord2_t(x,			y - height));
+
+		m_type = RenderableType::OTHER;
 	}
 
 	Rectangle::Rectangle(const coord2_t & point, float width, float height):
