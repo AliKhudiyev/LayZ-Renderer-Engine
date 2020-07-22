@@ -125,6 +125,14 @@ namespace lyz { namespace graphics {
 			
 			m_indexCountLine += 2;
 		}
+		else if (renderable->getType() == RenderableType::LINE_STRIP) {
+			for (unsigned i = m_indexCountLine, j = m_vertexCount; i < m_indexCountLine + 2 * coords.size(); i += 2, ++j) {
+				m_indicesLine[i + 0] = j + 0;
+				m_indicesLine[i + 1] = j + 1;
+			}	m_indicesLine[m_indexCountLine + 2 * coords.size() - 1] = m_vertexCount;
+
+			m_indexCountLine += 2 * coords.size();
+		}
 		else { // renderable->getType() == RenderableType::POINT
 			for (unsigned i = m_indexCountPoint, j = m_vertexCount; i < m_indexCountPoint + 1; ++i) {
 				m_indicesPoint[i] = j;
@@ -160,7 +168,7 @@ namespace lyz { namespace graphics {
 		for (unsigned i = 0; i < m_indexCountLine; ++i) {
 			std::cout << m_indicesLine[i] << " ";
 		}std::cout << '\n';
-
+		
 		assert(false);*/
 
 		LYZ_CALL(glDrawElements(GL_TRIANGLES, m_indexCount, GL_UNSIGNED_INT, nullptr));

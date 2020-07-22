@@ -32,12 +32,18 @@ namespace lyz { namespace graphics {
 	
 	void Circle::setSmoothness(float level)
 	{
-		m_nVertices = static_cast<int>(level * static_cast<float>(getOptimizedNVertices()));
+		setNVertices(static_cast<int>(level * static_cast<float>(getOptimizedNVertices())));
 	}
 	
 	void Circle::setNVertices(unsigned nvertices)
 	{
 		m_nVertices = nvertices;
+		if (m_nVertices < 3) {
+			std::cout << "WARNING[circle]: # of vertices cannot be less than 3!\n";
+			m_nVertices = 3;
+		}
+
+		construct();
 	}
 
 	unsigned Circle::getOptimizedNVertices() const
@@ -47,6 +53,10 @@ namespace lyz { namespace graphics {
 
 	void Circle::construct()
 	{
+		if (!m_coords.empty()) {
+			m_coords.clear();
+		}
+
 		math::vec3 vertex;
 		float radian = math::to_radians(360.0f / static_cast<float>(m_nVertices));
 

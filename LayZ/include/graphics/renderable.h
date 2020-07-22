@@ -24,6 +24,7 @@ namespace lyz { namespace graphics {
 	enum RenderableType {
 		POINT = 0,
 		LINE,
+		LINE_STRIP,
 		OTHER
 	};
 

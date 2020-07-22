@@ -132,7 +132,7 @@ namespace lyz { namespace graphics {
 	void Renderable::noFill(bool fill)
 	{
 		if (!fill) {
-			m_type = RenderableType::LINE;
+			m_type = RenderableType::LINE_STRIP;
 		}
 	}
 

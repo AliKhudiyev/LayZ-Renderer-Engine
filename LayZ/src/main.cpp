@@ -128,9 +128,12 @@ int main() {
 	//ocamera->setViewSpace(-2.0f, 2.0f, 2.0f, -2.0f, 1.0f, -1.0f);
 	//pcamera->setViewSpace(-1.0f, 1.0f, 1.0f, -1.0f, 0.1f, 100.0f);
 
+	//glEnable(GL_DEPTH_TEST);
+
     while (win->isRunning())
 	{
 		renderer->clear();
+		//glClear(GL_DEPTH_BUFFER_BIT);
 		
 		//renderer->store(sprite);
 		//renderer->store(sprite2);
@@ -159,6 +162,10 @@ int main() {
 		Line::setSize(5.0);
 
 		circle->noFill();
+		rct->noFill();
+
+		circle->setSmoothness(0.25f);
+		circle->setDepth(0.1f); // does not work due to disabled depth testing!
 
 		renderer->store(tri);
 		renderer->store(line1);
@@ -168,7 +175,7 @@ int main() {
 		renderer->store(point2);
 		renderer->store(rct2);
 		renderer->store(circle);
-
+		
 		renderer->draw();
 		
 		win->onUpdate();
