@@ -17,7 +17,6 @@ namespace lyz { namespace graphics {
 
 		static void setThickness(float size);
 		static void setSize(float size);
-		void setDepth(float depth) override;
 
 		inline static float getThickness() { return Line::lineSize; }
 		inline static float getSize() { return Line::lineSize; }

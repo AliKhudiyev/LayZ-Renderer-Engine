@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="include\vendor\stb\stb_vorbis.c" />
     <ClCompile Include="src\graphics\camera.cpp" />
+    <ClCompile Include="src\graphics\circle.cpp" />
     <ClCompile Include="src\graphics\instanceRenderer.cpp" />
     <ClCompile Include="src\graphics\buffers\buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\indexBuffer.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="include\graphics\buffers\vertexArray.h" />
     <ClInclude Include="include\graphics\buffers\vertexBuffer.h" />
     <ClInclude Include="include\graphics\camera.h" />
+    <ClInclude Include="include\graphics\circle.h" />
     <ClInclude Include="include\graphics\event.h" />
     <ClInclude Include="include\graphics\graphics.h" />
     <ClInclude Include="include\graphics\line.h" />

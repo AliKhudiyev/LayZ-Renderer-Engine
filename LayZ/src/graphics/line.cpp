@@ -44,10 +44,4 @@ namespace lyz { namespace graphics {
 		setThickness(size);
 	}
 
-	void Line::setDepth(float depth)
-	{
-		m_coords[0].data[2] = depth;
-		m_coords[1].data[2] = depth;
-	}
-
 } }

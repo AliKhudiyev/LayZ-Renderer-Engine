@@ -19,7 +19,6 @@ namespace lyz { namespace graphics {
 
 		static void setSize(float size);
 		static void makeCircular(bool isCircular = LYZ_POINT_CIRCULAR);
-		void setDepth(float depth) override;
 
 		inline static float getSize() { return pointSize; }
 		inline static bool getType() { return pointType; }

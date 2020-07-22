@@ -122,4 +122,18 @@ namespace lyz { namespace graphics {
 		setTexture(LYZ_NO_TEXTURE);
 	}
 
+	void Renderable::setDepth(float depth)
+	{
+		for (auto& coord : m_coords) {
+			coord.data[2] = depth;
+		}
+	}
+
+	void Renderable::noFill(bool fill)
+	{
+		if (!fill) {
+			m_type = RenderableType::LINE;
+		}
+	}
+
 } }

@@ -91,6 +91,33 @@ int main() {
 	Renderable* plane = new Renderable(pcoords);
 	plane->setColor(LYZ_COLOR3(0.0, 1.0, 0.0));
 
+	auto tri = new Triangle(0.0f, 0.0f, 0.5f, 1.0f);
+	tri->setColor(LYZ_COLOR3(0.0f, 1.0f, 1.0f));
+	tri->setTexture(texture1);
+
+	auto rct = new Rectangle(0.0f, 0.0f, 1.0f, 1.0f);
+	//rct->setDepth(-0.2f);
+	rct->setTexture(texture1);
+
+	auto rct2 = new Rectangle(-1.0f, 0.0f, 0.5f, 0.8f);
+	//rct2->setDepth(-0.5f);
+	rct2->setTexture(texture2);
+
+	auto line1 = new Line(0.0f, 0.0f, 1.0f, 1.0f);
+	line1->setColor(LYZ_COLOR3(1.0f, 0.0f, 1.0f));
+
+	auto line2 = new Line(0.0f, 0.0f, -1.0f, 1.0f);
+	line2->setColor(LYZ_COLOR3(0.0f, 1.0f, 0.0f));
+
+	auto point1 = new Point(-0.1f, 0.5f);
+	point1->setColor(LYZ_COLOR3(1.0f, 1.0f, 1.0f));
+
+	auto point2 = new Point(-0.1f, 1.0f);
+	point2->setColor(LYZ_COLOR3(0.0f, 1.0f, 1.0f));
+
+	auto circle = new Circle(-1.0f, -1.0f, 0.5f);
+	circle->setColor(LYZ_COLOR3(0.0f, 1.0f, 0.5f));
+
 	//pixelRenderer->setPixelWidth(40);
 	//pixelRenderer->setPixelHeight(40);
 
@@ -127,33 +154,11 @@ int main() {
 		//pixelRenderer->setPixelAt(0, 0, LYZ_COLOR3(1.0, 1.0, 1.0));
 		//pixelRenderer->draw();
 
-		auto tri = new Triangle(0.0f, 0.0f, 0.5f, 1.0f);
-		tri->setColor(LYZ_COLOR3(0.0f, 1.0f, 1.0f));
-		tri->setTexture(texture1);
-
-		auto rct = new Rectangle(0.0f, 0.0f, 1.0f, 1.0f);
-		//rct->setDepth(-0.2f);
-		rct->setTexture(texture1);
-		
-		auto rct2 = new Rectangle(-1.0f, 0.0f, 0.5f, 0.8f);
-		//rct2->setDepth(-0.5f);
-		rct2->setTexture(texture2);
-		
-		auto line1 = new Line(0.0, 0.0, 1.0, 1.0);
-		line1->setColor(LYZ_COLOR3(1.0, 0.0, 1.0));
-
-		auto line2 = new Line(0.0, 0.0, -1.0, 1.0);
-		line2->setColor(LYZ_COLOR3(0.0, 1.0, 0.0));
-		
-		auto point1 = new Point(-0.1, 0.5);
-		point1->setColor(LYZ_COLOR3(1.0, 1.0, 1.0));
-
-		auto point2 = new Point(-0.1, 1.0);
-		point2->setColor(LYZ_COLOR3(0.0, 1.0, 1.0));
-
 		//Point::makeCircular();
 		Point::setSize(10.0);
 		Line::setSize(5.0);
+
+		circle->noFill();
 
 		renderer->store(tri);
 		renderer->store(line1);
@@ -162,6 +167,7 @@ int main() {
 		renderer->store(rct);
 		renderer->store(point2);
 		renderer->store(rct2);
+		renderer->store(circle);
 
 		renderer->draw();
 		

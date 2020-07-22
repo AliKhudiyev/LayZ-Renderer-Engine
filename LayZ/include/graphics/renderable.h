@@ -45,15 +45,16 @@ namespace lyz { namespace graphics {
 		Renderable(const std::vector<coord2_t>& coords);
 		~Renderable();
 
-		virtual void setCoords(const std::vector<coord_t>& coords);
-		virtual void setCoords(const std::vector<coord2_t>& coords);
-		virtual void setCoordAt(unsigned index, const coord_t& coord);
-		virtual void setCoordAt(unsigned index, const coord2_t& coord);
-		virtual void setColor(const color_t& color);
-		virtual void setColor(const color3_t& color);
-		virtual void setTexture(const Texture* texture);
-		virtual void unsetTexture();
-		virtual void setDepth(float depth) {};
+		void setCoords(const std::vector<coord_t>& coords);
+		void setCoords(const std::vector<coord2_t>& coords);
+		void setCoordAt(unsigned index, const coord_t& coord);
+		void setCoordAt(unsigned index, const coord2_t& coord);
+		void setColor(const color_t& color);
+		void setColor(const color3_t& color);
+		void setTexture(const Texture* texture);
+		void unsetTexture();
+		void setDepth(float depth);
+		void noFill(bool fill = false);
 
 		inline const std::vector<coord_t>& getCoords() const { return m_coords; }
 		inline const math::vec4& getColor() const { return m_color; }

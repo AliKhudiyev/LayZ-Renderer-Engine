@@ -58,11 +58,4 @@ namespace lyz { namespace graphics {
 	{
 	}
 
-	void Triangle::setDepth(float depth)
-	{
-		m_coords[0].data[2] = depth;
-		m_coords[1].data[2] = depth;
-		m_coords[2].data[2] = depth;
-	}
-
 } }

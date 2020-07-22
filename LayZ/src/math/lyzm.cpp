@@ -2,6 +2,16 @@
 
 namespace lyz { namespace math {
 
+	float to_radians(float angle)
+	{
+		return angle * M_PI / 180.0f;
+	}
+
+	float to_angle(float radian)
+	{
+		return radian * 180.0 / M_PI;
+	}
+
 	vec2 normalize(const vec2 & vec)
 	{
 		auto length = sqrtf(powf(vec.data[0], 2.0) + powf(vec.data[1], 2.0));
