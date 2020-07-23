@@ -142,6 +142,10 @@
     <ClCompile Include="include\vendor\stb\stb_vorbis.c" />
     <ClCompile Include="src\graphics\camera.cpp" />
     <ClCompile Include="src\graphics\circle.cpp" />
+    <ClCompile Include="src\graphics\cone.cpp" />
+    <ClCompile Include="src\graphics\cuboid.cpp" />
+    <ClCompile Include="src\graphics\cylinder.cpp" />
+    <ClCompile Include="src\graphics\oval.cpp" />
     <ClCompile Include="src\graphics\instanceRenderer.cpp" />
     <ClCompile Include="src\graphics\buffers\buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\indexBuffer.cpp" />
@@ -153,9 +157,11 @@
     <ClCompile Include="src\graphics\perspectiveCamera.cpp" />
     <ClCompile Include="src\graphics\pixelRenderer.cpp" />
     <ClCompile Include="src\graphics\point.cpp" />
+    <ClCompile Include="src\graphics\pyramid.cpp" />
     <ClCompile Include="src\graphics\rectangle.cpp" />
     <ClCompile Include="src\graphics\renderable.cpp" />
     <ClCompile Include="src\graphics\renderer.cpp" />
+    <ClCompile Include="src\graphics\tetrahedron.cpp" />
     <ClCompile Include="src\graphics\texture.cpp" />
     <ClCompile Include="src\graphics\triangle.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -179,6 +185,10 @@
     <ClInclude Include="include\graphics\buffers\vertexBuffer.h" />
     <ClInclude Include="include\graphics\camera.h" />
     <ClInclude Include="include\graphics\circle.h" />
+    <ClInclude Include="include\graphics\cone.h" />
+    <ClInclude Include="include\graphics\cuboid.h" />
+    <ClInclude Include="include\graphics\cylinder.h" />
+    <ClInclude Include="include\graphics\oval.h" />
     <ClInclude Include="include\graphics\event.h" />
     <ClInclude Include="include\graphics\graphics.h" />
     <ClInclude Include="include\graphics\line.h" />
@@ -186,11 +196,13 @@
     <ClInclude Include="include\graphics\perspectiveCamera.h" />
     <ClInclude Include="include\graphics\pixelRenderer.h" />
     <ClInclude Include="include\graphics\point.h" />
+    <ClInclude Include="include\graphics\pyramid.h" />
     <ClInclude Include="include\graphics\rectangle.h" />
     <ClInclude Include="include\graphics\renderable.h" />
     <ClInclude Include="include\graphics\renderer.h" />
     <ClInclude Include="include\graphics\shader.h" />
     <ClInclude Include="include\graphics\instanceRenderer.h" />
+    <ClInclude Include="include\graphics\tetrahedron.h" />
     <ClInclude Include="include\graphics\texture.h" />
     <ClInclude Include="include\graphics\triangle.h" />
     <ClInclude Include="include\graphics\window.h" />

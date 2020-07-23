@@ -136,4 +136,36 @@ namespace lyz { namespace graphics {
 		}
 	}
 
+	void Renderable::translate(float x, float y, float z)
+	{
+		auto translation = math::mat4::translate(x, y, z);
+
+		for (auto& coord : m_coords) {
+			coord = translation.mult({ coord, 1.0f }).xyz();
+		}
+	}
+
+	void Renderable::scale(float xfactor, float yfactor, float zfactor)
+	{
+		auto scaling = math::mat4::scale(xfactor, yfactor, zfactor);
+
+		for (auto& coord : m_coords) {
+			coord = scaling.mult({ coord, 1.0f }).xyz();
+		}
+	}
+
+	void Renderable::scale(float factor)
+	{
+		scale(factor, factor, factor);
+	}
+
+	void Renderable::rotate(float angle, const coord_t & axis)
+	{
+		auto rotation = math::mat4::rotate(angle, axis);
+
+		for (auto& coord : m_coords) {
+			coord = rotation.mult({ coord, 1.0f }).xyz();
+		}
+	}
+
 } }

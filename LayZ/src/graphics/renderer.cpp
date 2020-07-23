@@ -75,6 +75,11 @@ namespace lyz { namespace graphics {
 
 	void Renderer::store(const Renderable* renderable)
 	{
+		const auto& subRenderables = renderable->getSubRenderables();
+		for (const auto& subRenderable : subRenderables) {
+			store(subRenderable);
+		}
+
 		setStoreStatus(LYZ_RENDERER_STORE_START);
 		
 		const auto& coords = renderable->getCoords();

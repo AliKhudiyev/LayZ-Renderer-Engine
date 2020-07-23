@@ -50,18 +50,24 @@ namespace lyz { namespace graphics {
 		void setCoords(const std::vector<coord2_t>& coords);
 		void setCoordAt(unsigned index, const coord_t& coord);
 		void setCoordAt(unsigned index, const coord2_t& coord);
-		void setColor(const color_t& color);
-		void setColor(const color3_t& color);
-		void setTexture(const Texture* texture);
-		void unsetTexture();
+		virtual void setColor(const color_t& color);
+		virtual void setColor(const color3_t& color);
+		virtual void setTexture(const Texture* texture);
+		virtual void unsetTexture();
 		void setDepth(float depth);
-		void noFill(bool fill = false);
+		virtual void noFill(bool fill = false);
 
 		inline const std::vector<coord_t>& getCoords() const { return m_coords; }
 		inline const math::vec4& getColor() const { return m_color; }
 		inline const std::vector<texture_t>& getTextureCoords() const { return m_texCoords; }
 		inline unsigned getTextureID() const { return m_texture? m_texture->getID() : -1; }
 		inline RenderableType getType() const { return m_type; }
+		inline virtual std::vector<const Renderable*> getSubRenderables() const { return std::vector<const Renderable*>(); }
+	
+		virtual void translate(float x, float y, float z);
+		virtual void scale(float xfactor, float yfactor, float zfactor);
+		virtual void scale(float factor);
+		virtual void rotate(float angle, const coord_t& axis);
 	};
 
 } }

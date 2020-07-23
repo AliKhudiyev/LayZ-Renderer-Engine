@@ -115,8 +115,29 @@ int main() {
 	auto point2 = new Point(-0.1f, 1.0f);
 	point2->setColor(LYZ_COLOR3(0.0f, 1.0f, 1.0f));
 
-	auto circle = new Circle(-1.0f, -1.0f, 0.5f);
-	circle->setColor(LYZ_COLOR3(0.0f, 1.0f, 0.5f));
+	auto oval = new Oval(-1.0f, -1.0f, 1.0f, 0.5f);
+	oval->setColor(LYZ_COLOR3(0.0f, 1.0f, 0.5f));
+
+	auto circle = new Circle(1.0f, -1.0f, 0.5f);
+	circle->setColor(LYZ_COLOR3(0.0f, 0.5f, 1.0f));
+
+	auto cube = new Cuboid(0.0f, 0.0f, 0.0f, 0.5f, 0.5f, 0.5f);
+	cube->setColor(LYZ_COLOR3(0.5f, 0.5f, 0.5f));
+
+	auto tetrahedron = new Tetrahedron(0.0f, 0.0f, 0.0f, 1.0f);
+	tetrahedron->setColor(LYZ_COLOR3(0.3f, 0.3f, 0.8f));
+
+	auto pyramid = new Pyramid(0.0f, 0.0f, 0.0f, 1.0f);
+	pyramid->setTexture(texture1);
+
+	auto cone = new Cone(0.0f, 0.0f, 0.0f, 0.5f, 2.0f);
+	//cone->setNVertices(50);
+	//cone->noFill();
+	cone->setColor(LYZ_COLOR3(0.5f, 0.25f, 0.25f));
+
+	auto cylinder = new Cylinder(0.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+	cylinder->setColor(LYZ_COLOR3(0.0f, 0.8f, 0.2f));
+	cylinder->noFill();
 
 	//pixelRenderer->setPixelWidth(40);
 	//pixelRenderer->setPixelHeight(40);
@@ -129,6 +150,10 @@ int main() {
 	//pcamera->setViewSpace(-1.0f, 1.0f, 1.0f, -1.0f, 0.1f, 100.0f);
 
 	//glEnable(GL_DEPTH_TEST);
+
+	//pyramid->translate(1.0f, -0.0f, 0.0f);
+	//pyramid->scale(4.0f, 0.25f, 1.0f);
+	//pyramid->rotate(45.0f, coord_t(1.0f, 1.0f, 1.0f));
 
     while (win->isRunning())
 	{
@@ -161,21 +186,28 @@ int main() {
 		Point::setSize(10.0);
 		Line::setSize(5.0);
 
-		circle->noFill();
+		oval->noFill();
 		rct->noFill();
+		pyramid->noFill();
 
-		circle->setSmoothness(0.25f);
-		circle->setDepth(0.1f); // does not work due to disabled depth testing!
+		oval->setSmoothness(0.5f);
+		oval->setDepth(0.1f); // does not work due to disabled depth testing!
 
-		renderer->store(tri);
-		renderer->store(line1);
-		renderer->store(line2);
-		renderer->store(point1);
-		renderer->store(rct);
-		renderer->store(point2);
-		renderer->store(rct2);
-		renderer->store(circle);
-		
+		//renderer->store(tri);
+		//renderer->store(line1);
+		//renderer->store(line2);
+		//renderer->store(point1);
+		//renderer->store(rct);
+		//renderer->store(point2);
+		//renderer->store(rct2);
+		//renderer->store(oval);
+		//renderer->store(circle);
+		//renderer->store(cube);
+		//renderer->store(tetrahedron);
+		//renderer->store(pyramid);
+		//renderer->store(cone);
+		renderer->store(cylinder);
+
 		renderer->draw();
 		
 		win->onUpdate();
