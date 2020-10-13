@@ -26,7 +26,7 @@ int main() {
 
     cout<<"Current file path is "<<filesystem::current_path()<<endl;
 
-	Window* win = new Window("BIG KAMAL", WIDTH, HEIGHT);
+	Window* win = new Window("BIG BICEPS", WIDTH, HEIGHT);
 
 	//glfwSwapInterval(0);
 
