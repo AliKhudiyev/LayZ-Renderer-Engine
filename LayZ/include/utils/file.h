@@ -13,12 +13,12 @@ namespace lyz { namespace shaders {
         Other
     };
 
-    std::string vertex_shader;
-    std::string tessellationControl_shader;
-    std::string tessellationEvaluation_shader;
-    std::string geometry_shader;
-    std::string fragment_shader;
-    std::string compute_shader;
+//    std::string vertex_shader;
+//    std::string tessellationControl_shader;
+//    std::string tessellationEvaluation_shader;
+//    std::string geometry_shader;
+//    std::string fragment_shader;
+//    std::string compute_shader;
 
 } }
 
